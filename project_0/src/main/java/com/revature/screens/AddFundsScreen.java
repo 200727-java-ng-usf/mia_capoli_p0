@@ -1,4 +1,8 @@
 package com.revature.screens;
 
-public class AddFundsScreen {
+public class AddFundsScreen extends Screen{
+    @Override
+    public void render() {
+
+    }
 }
