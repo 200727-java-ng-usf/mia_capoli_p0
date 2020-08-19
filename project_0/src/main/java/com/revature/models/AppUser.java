@@ -8,7 +8,8 @@ public class AppUser {
     private String password;
     private String firstName;
     private String lastName;
-    private Double balance;
+    //TODO associate account w user somehow
+    // private Account checkingAccount;
 
 
     public AppUser(String username, String password) {
@@ -28,7 +29,7 @@ public class AppUser {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.balance = balance;
+        //
     }
 
     public String getUsername() {
@@ -63,14 +64,6 @@ public class AppUser {
         this.lastName = lastName;
     }
 
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,12 +72,11 @@ public class AppUser {
         return Objects.equals(username, appUser.username) &&
                 Objects.equals(password, appUser.password) &&
                 Objects.equals(firstName, appUser.firstName) &&
-                Objects.equals(lastName, appUser.lastName) &&
-                Objects.equals(balance, appUser.balance);
+                Objects.equals(lastName, appUser.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, firstName, lastName, balance);
+        return Objects.hash(username, password, firstName, lastName);
     }
 }

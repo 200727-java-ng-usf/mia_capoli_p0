@@ -33,12 +33,10 @@ public class RegisterScreen extends Screen{
             username = consoleReader.readLine();
             System.out.println("Please enter a password: ");
             password = consoleReader.readLine();
-            //Todo with time: Implement initial deposit handling
-            // System.out.println("Would you like to make an initial deposit? Enter Y or N");
 
             AppUser newUser = new AppUser(username, password, firstName, lastName);
-
-            //Todo add new user to the repo
+            AppUser registeredUser = userService.registration(newUser);
+            //TODO add new user to the repo
 
         } catch (Exception e) {
             e.printStackTrace();

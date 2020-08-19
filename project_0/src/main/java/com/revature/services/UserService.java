@@ -30,12 +30,12 @@ public class UserService {
 
         //Todo implement a method to save the user to the repo
 
-        if (newUser.getBalance().equals(0.00)) {
-            newUser.setBalance(0.00);
-        } else {
-            //todo implement check for user's initial balance
-            newUser.setBalance(0.00);
-        }
+//        if (newUser.getAccount.getBalance().equals(0.00)) {
+//            newUser.setBalance(0.00);
+//        } else {
+//            //todo implement check for user's initial balance
+//            newUser.getAccount.setBalance(0.00);
+//        }
 
         return newUser;
     }

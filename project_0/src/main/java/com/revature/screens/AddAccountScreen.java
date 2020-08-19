@@ -5,10 +5,12 @@ import com.revature.services.UserService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class WithdrawScreen extends Screen {
+public class AddAccountScreen extends Screen {
+
     private UserService userService;
 
-    public WithdrawScreen(UserService userService) {
+    public
+    AddAccountScreen(UserService userService) {
         this.userService = userService;
     }
 
@@ -20,12 +22,11 @@ public class WithdrawScreen extends Screen {
             //TODO get proper logged in user
             //AppUser loggedInUser = current AppUser();
 
-            //double balance = loggedInUser.getBalance;
+            //create account;
 
-            //how much would you like to withdraw?
-            //get withdraw balance check if valid
+            //associate account with user
 
-            //System.out.println("Your balance is now: " + balance);
+            //this is your account
             //TODO implement navigation
 
 
