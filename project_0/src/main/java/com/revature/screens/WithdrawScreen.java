@@ -9,6 +9,7 @@ public class WithdrawScreen extends Screen {
     private UserService userService;
 
     public WithdrawScreen(UserService userService) {
+        super("WithdrawFundsScreen", "/withdrawFunds");
         this.userService = userService;
     }
 

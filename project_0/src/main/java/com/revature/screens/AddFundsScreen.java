@@ -10,6 +10,7 @@ public class AddFundsScreen extends Screen{
     private UserService userService;
 
     public AddFundsScreen(UserService userService) {
+        super("AddFundsScreen", "/addFunds");
         this.userService = userService;
     }
 
@@ -36,4 +37,6 @@ public class AddFundsScreen extends Screen{
             e.printStackTrace();
         }
     }
+
+
 }

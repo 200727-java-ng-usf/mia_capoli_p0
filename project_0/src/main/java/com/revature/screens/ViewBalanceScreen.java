@@ -11,6 +11,7 @@ public class ViewBalanceScreen extends Screen{
     private UserService userService;
 
     public ViewBalanceScreen(UserService userService) {
+        super("ViewBalanceScreen", "/viewBalance");
         this.userService = userService;
     }
 
@@ -32,4 +33,5 @@ public class ViewBalanceScreen extends Screen{
             e.printStackTrace();
         }
     }
+
 }

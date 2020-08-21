@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class AppUser {
     //AppUser POJO
+    private Integer id;
     private String username;
     private String password;
     private String firstName;
@@ -11,6 +12,10 @@ public class AppUser {
     //TODO associate account w user somehow
     // private Account checkingAccount;
 
+
+    public AppUser() {
+
+    }
 
     public AppUser(String username, String password) {
         this.username = username;
@@ -24,12 +29,21 @@ public class AppUser {
         this.lastName = lastName;
     }
 
-    public AppUser(String username, String password, String firstName, String lastName, double balance) {
+    public AppUser(Integer id, String username, String password, String firstName, String lastName) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        //
+    }
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getUsername() {

@@ -11,6 +11,7 @@ public class AddAccountScreen extends Screen {
 
     public
     AddAccountScreen(UserService userService) {
+        super("AddAccountScreen", "/addAccount");
         this.userService = userService;
     }
 

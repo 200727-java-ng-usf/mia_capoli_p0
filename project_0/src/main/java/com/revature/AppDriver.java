@@ -1,18 +1,15 @@
 package com.revature;
 
-import com.revature.screens.LoginScreen;
-import com.revature.screens.RegisterScreen;
-import com.revature.services.UserService;
+
+import com.revature.util.AppState;
 
 public class AppDriver {
 
+    public static AppState app = new AppState();
+
     public static void main(String[] args) {
-
-        UserService userService = new UserService();
-        RegisterScreen registerScreen = new RegisterScreen(userService);
-        registerScreen.render();
-
-        LoginScreen loginScreen = new LoginScreen(userService);
-        loginScreen.render();
+        while (app.isAppRunning()) {
+            app.getRouter().navigate("/home");
+        }
     }
 }
