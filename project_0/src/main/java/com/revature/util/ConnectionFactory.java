@@ -24,7 +24,7 @@ public class ConnectionFactory {
 
             Class.forName("org.postgresql.Driver");
 
-            conn = DriverManager.getConnection("jdbc:postgresql://java-ng-usf-200727.cv76tnqmah34.us-east-2.rds.amazonaws.com:5432/postgres", "postgres", "capolimia");
+            conn = DriverManager.getConnection("jdbc:postgresql://java-ng-usf-200727.cv76tnqmah34.us-east-2.rds.amazonaws.com:5432/postgres", "//", "//");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
