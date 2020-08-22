@@ -12,6 +12,12 @@ public class Account {
     public Account() {
     }
 
+    public Account(String accountName, int accountId) {
+        this.accountName = accountName;
+        this.accountId = accountId;
+        this.balance = 0.00d;
+    }
+
     public String getAccountName() {
         return accountName;
     }

@@ -6,6 +6,8 @@ import com.revature.services.UserService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import static com.revature.AppDriver.app;
+
 public class ViewBalanceScreen extends Screen{
 
     private UserService userService;
@@ -17,13 +19,11 @@ public class ViewBalanceScreen extends Screen{
 
     @Override
     public void render() {
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            //todo get proper logged in user
-            //AppUser loggedInUser = current AppUser();
+            AppUser currentUser = app.getCurrentUser();
 
-            //double balance = loggedInUser.getBalance;
+
 
             //System.out.println("Your balance is: " + balance);
             //todo implement navigation

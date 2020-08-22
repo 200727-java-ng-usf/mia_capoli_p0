@@ -26,6 +26,7 @@ public class AppUser {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.role = Role.BASIC_MEMBER;
     }
 
     public AppUser(String username, String password, String firstName, String lastName, Role role) {

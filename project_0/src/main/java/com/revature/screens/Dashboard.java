@@ -1,12 +1,16 @@
 package com.revature.screens;
 
+import com.revature.services.AccountService;
+import com.revature.services.UserService;
+
 import java.io.IOException;
 
 import static com.revature.AppDriver.app;
 
 public class Dashboard extends Screen{
-    protected Dashboard() {
-        super("DashboardScreen", "/dashboard");
+
+    public Dashboard() {
+        super("DashboardScreen", "/Dashboard");
     }
 
     @Override

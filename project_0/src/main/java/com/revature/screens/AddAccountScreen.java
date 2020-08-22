@@ -1,6 +1,8 @@
 package com.revature.screens;
 
+import com.revature.models.Account;
 import com.revature.models.AppUser;
+import com.revature.services.AccountService;
 import com.revature.services.UserService;
 
 import java.io.BufferedReader;
@@ -10,30 +12,37 @@ import static com.revature.AppDriver.app;
 
 public class AddAccountScreen extends Screen {
 
-    private UserService userService;
+    private AccountService accountService;
 
     public
-    AddAccountScreen(UserService userService) {
+    AddAccountScreen(AccountService accountService) {
         super("AddAccountScreen", "/addAccount");
-        this.userService = userService;
+        this.accountService = accountService;
     }
 
     @Override
     public void render() {
+        int accountId;
+        String accountName;
+
 
         try {
-            AppUser currentUser = app.getCurrentUser();
+            System.out.println("Add a bank account!");
+            System.out.println("Please enter your desired Account Id: ");
+            accountId = Integer.parseInt(app.getConsole().readLine());
+            System.out.println("Please enter the account name: ");
+            accountName = app.getConsole().readLine();
 
-            //create account;
+            Account newAccount = new Account(accountName, accountId);
+            accountService.registration(newAccount);
 
-            //associate account with user
-
-            //this is your account
-            //TODO implement navigation
-
+            if (app.isSessionValid()) {
+                app.getRouter().navigate("/selectAccount");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }
