@@ -49,12 +49,24 @@ public class AppUserRepo {
 
         try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
 
-            String sql = "SELECT * FROM project0.app_users WHERE username = ?";
+            String sql = "SELECT * FROM project0.app_users";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, username);
 
             ResultSet rs = pstmt.executeQuery();
-            _user = mapResultSet(rs).stream().findFirst();
+
+            while(rs.next()) {
+                AppUser temp = new AppUser();
+                temp.setId(rs.getInt("id"));
+                temp.setUsername(rs.getString("username"));
+                temp.setPassword(rs.getString("password"));
+                temp.setFirstName(rs.getString("first_name"));
+                temp.setLastName(rs.getString("last_name"));
+                if (temp.getUsername() == username) {
+                    _user = Optional.of(temp);
+                }
+            }
+
+            return _user;
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();

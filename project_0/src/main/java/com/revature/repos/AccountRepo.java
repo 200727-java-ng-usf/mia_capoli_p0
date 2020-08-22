@@ -44,12 +44,19 @@ public class AccountRepo {
 
         try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
 
-            String sql = "SELECT * FROM project0.user_accounts WHERE account_id = ?";
+            String sql = "SELECT * FROM project0.user_accounts";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, accountId);
 
             ResultSet rs = pstmt.executeQuery();
-            _account = mapAccountResultSet(rs).stream().findFirst();
+
+            while(rs.next()) {
+                Account temp = new Account();
+                temp.setAccountId(rs.getInt("account_id"));
+
+                if (temp.getAccountId() == accountId) {
+                    _account = Optional.of(temp);
+                }
+            }
 
 
         } catch (SQLException sqle) {

@@ -37,9 +37,9 @@ public class UserService {
             throw new RuntimeException("Invalid credentials given for registration.");
         }
 
-        Optional<AppUser> existingUser = userRepo.findUserByUsername(newUser.getUsername());
+        Optional<AppUser> _existingUser = userRepo.findUserByUsername(newUser.getUsername());
 
-        if (existingUser.isPresent()) {
+        if (_existingUser.isPresent()) {
             throw new RuntimeException("Provided username is already in use!");
         }
 
