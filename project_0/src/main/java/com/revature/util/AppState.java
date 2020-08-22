@@ -34,11 +34,12 @@ public class AppState {
         router.addScreen(new HomeScreen())
               .addScreen(new RegisterScreen(userService))
               .addScreen(new LoginScreen(userService))
-              .addScreen(new ViewBalanceScreen(userService))
+              .addScreen(new ViewBalanceScreen())
               .addScreen(new WithdrawScreen(userService))
               .addScreen(new AddFundsScreen(userService))
               .addScreen(new AddAccountScreen(accountService))
-              .addScreen(new Dashboard());
+              .addScreen(new Dashboard())
+              .addScreen(new SelectAccountScreen(accountService));
     }
 
     public BufferedReader getConsole() {

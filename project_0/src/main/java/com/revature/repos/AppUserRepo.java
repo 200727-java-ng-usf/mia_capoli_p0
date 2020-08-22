@@ -55,6 +55,7 @@ public class AppUserRepo {
             ResultSet rs = pstmt.executeQuery();
             _user = mapResultSet(rs).stream().findFirst();
 
+            return _user;
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();

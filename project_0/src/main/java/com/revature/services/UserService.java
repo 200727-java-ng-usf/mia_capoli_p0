@@ -42,12 +42,7 @@ public class UserService {
             throw new RuntimeException("Provided username is already in use!");
         }
 
-//        if (newUser.getAccount.getBalance().equals(0.00)) {
-//            newUser.setBalance(0.00);
-//        } else {
-//            //todo implement check for user's initial balance
-//            newUser.getAccount.setBalance(0.00);
-//        }
+
         userRepo.save(newUser);
         app.setCurrentUser(newUser);
     }

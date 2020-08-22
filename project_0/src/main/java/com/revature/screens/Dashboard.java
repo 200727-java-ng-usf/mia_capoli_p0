@@ -19,7 +19,7 @@ public class Dashboard extends Screen{
         System.out.println("1) Check Balance");
         System.out.println("2) Add Funds");
         System.out.println("3) Withdraw Funds");
-        System.out.println("3) Go home");
+        System.out.println("4) Go home");
 
         try {
             System.out.print("> ");

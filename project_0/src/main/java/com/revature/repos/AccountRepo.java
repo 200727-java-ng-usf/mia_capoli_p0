@@ -63,7 +63,7 @@ public class AccountRepo {
 
     public Set<Account> findUsersAccounts(AppUser currentUser) {
 
-        Optional<Account> _account = Optional.empty();
+        Set<Account> _account = new HashSet<>();
 
         try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
 
@@ -73,7 +73,7 @@ public class AccountRepo {
 
             ResultSet rs = pstmt.executeQuery();
             _account = mapAccountResultSet(rs);
-
+            //make sure not null
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();

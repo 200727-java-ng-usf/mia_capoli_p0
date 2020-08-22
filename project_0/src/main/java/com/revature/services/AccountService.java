@@ -2,9 +2,11 @@ package com.revature.services;
 
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.models.Account;
+import com.revature.models.AppUser;
 import com.revature.repos.AccountRepo;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static com.revature.AppDriver.app;
 
@@ -46,6 +48,25 @@ public class AccountService {
         app.setCurrentAccount(newAccount);
     }
 
+    public Set<Account> returnUsersAccounts(AppUser currentUser) {
+        currentUser = app.getCurrentUser();
+        Set<Account> usersAccounts = accountRepo.findUsersAccounts(app.getCurrentUser());
+
+        return usersAccounts;
+
+    }
+
+    public Account findUserByAccountId(int accountId) {
+
+        Optional<Account> _account = accountRepo.findUserByAccountId(accountId);
+
+        if (!_account.isPresent()) {
+            throw new AuthenticatorException("That account does not exist!");
+        }
+        Account account = _account.get();
+        return account;
+
+    }
 
     public boolean isAccountValid(Account account) {
         if (account == null) return false;

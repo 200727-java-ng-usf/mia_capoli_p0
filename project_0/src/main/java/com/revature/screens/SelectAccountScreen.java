@@ -1,17 +1,21 @@
 package com.revature.screens;
 
-import com.revature.exceptions.AuthenticatorException;
+import com.revature.models.Account;
 import com.revature.models.AppUser;
 import static com.revature.AppDriver.app;
-import com.revature.repos.AppUserRepo;
+
 import com.revature.services.AccountService;
+
+import java.io.IOException;
+import java.util.Optional;
+import java.util.Set;
 
 
 public class SelectAccountScreen extends Screen{
 
     private AccountService accountService;
 
-    protected SelectAccountScreen(AccountService accountService) {
+    public SelectAccountScreen(AccountService accountService) {
         super("SelectAccountScreen", "/selectAccount");
         this.accountService = accountService;
     }
@@ -20,6 +24,33 @@ public class SelectAccountScreen extends Screen{
 
     @Override
     public void render() {
+        AppUser currentUser = app.getCurrentUser();
+        Set<Account> accounts = accountService.returnUsersAccounts(currentUser);
+
+        if (accounts == null) {
+            System.out.println("null");
+        }
+        for (Account userAccount : accounts) {
+            System.out.println(userAccount);
+        }
+
+        System.out.println("Please enter the account number that you would like to access:");
+
+        try {
+            System.out.print("> ");
+            int userSelection = Integer.parseInt(app.getConsole().readLine().trim());
+            Account currentAccount = accountService.findUserByAccountId(userSelection);
+
+
+            app.setCurrentAccount(currentAccount);
+            app.getRouter().navigate("/Dashboard");
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        
 
     }
 
