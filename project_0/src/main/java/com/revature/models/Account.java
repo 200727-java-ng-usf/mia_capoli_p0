@@ -4,11 +4,20 @@ import java.util.Objects;
 
 public class Account {
 
+    String accountName;
     int accountId;
     double balance;
     //TODO implement connection to appuser
 
     public Account() {
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 
     public int getAccountId() {

@@ -9,8 +9,7 @@ public class AppUser {
     private String password;
     private String firstName;
     private String lastName;
-    //TODO associate account w user somehow
-    // private Account checkingAccount;
+    private Role role;
 
 
     public AppUser() {
@@ -29,14 +28,10 @@ public class AppUser {
         this.lastName = lastName;
     }
 
-    public AppUser(Integer id, String username, String password, String firstName, String lastName) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public AppUser(String username, String password, String firstName, String lastName, Role role) {
+        this(firstName, lastName, username, password);
+        this.role = role;
     }
-
 
     public Integer getId() {
         return id;
@@ -76,6 +71,14 @@ public class AppUser {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override

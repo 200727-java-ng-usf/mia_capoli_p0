@@ -1,9 +1,12 @@
 package com.revature.screens;
 
+import com.revature.models.AppUser;
 import com.revature.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
+import static com.revature.AppDriver.app;
 
 public class AddAccountScreen extends Screen {
 
@@ -17,11 +20,9 @@ public class AddAccountScreen extends Screen {
 
     @Override
     public void render() {
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            //TODO get proper logged in user
-            //AppUser loggedInUser = current AppUser();
+            AppUser currentUser = app.getCurrentUser();
 
             //create account;
 
