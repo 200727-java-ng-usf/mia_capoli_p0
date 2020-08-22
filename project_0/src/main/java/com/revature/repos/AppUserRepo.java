@@ -31,6 +31,7 @@ public class AppUserRepo {
                 appUser.setPassword(rs.getString("password"));
                 appUser.setFirstName(rs.getString("first_name"));
                 appUser.setLastName(rs.getString("last_name"));
+
             }
 
             return Optional.of(appUser);

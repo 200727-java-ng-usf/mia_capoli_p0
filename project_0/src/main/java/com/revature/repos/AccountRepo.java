@@ -127,7 +127,6 @@ public class AccountRepo {
 
     public void updateBalance(double balance) {
 
-        Account currentAccount = app.getCurrentAccount();
         try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
 
             String sql = "UPDATE project0.user_accounts SET balance = ? WHERE assoc_user_id = ?";
