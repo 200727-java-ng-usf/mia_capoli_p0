@@ -48,19 +48,16 @@ public class AppUserRepo {
 
         try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
 
-            String sql = "SELECT * FROM revabooks.app_users WHERE username = ?";
+            String sql = "SELECT * FROM project0.app_users WHERE username = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
 
             ResultSet rs = pstmt.executeQuery();
             _user = mapResultSet(rs).stream().findFirst();
 
-            return _user;
-
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
-
         return _user;
 
     }
@@ -108,7 +105,6 @@ public class AppUserRepo {
             temp.setPassword(rs.getString("password"));
             temp.setFirstName(rs.getString("first_name"));
             temp.setLastName(rs.getString("last_name"));
-            temp.setRole(Role.getByName(rs.getString("name")));
             System.out.println(temp);
             users.add(temp);
         }

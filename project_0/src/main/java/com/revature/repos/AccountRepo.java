@@ -86,26 +86,26 @@ public class AccountRepo {
 
     public void save(Account newAccount) {
         AppUser currentUser = app.getCurrentUser();
-            try (Connection conn = ConnectionFactory.getConnFactory().getConnection()){
+        try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
 
-                String sql = "INSERT INTO project0.user_accounts (account_id, name, balance, assoc_user_id) " +
-                        "VALUES (?, ? , ?, ?)";
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-
-
-                pstmt.setInt(1, newAccount.getAccountId());
-                pstmt.setString(2, newAccount.getAccountName());
-                pstmt.setDouble(3, newAccount.getBalance());
-                pstmt.setInt(4, currentUser.getId());
+            String sql = "INSERT INTO project0.user_accounts (account_id, name, balance, assoc_user_id) " +
+                    "VALUES (?, ? , ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
 
-                pstmt.executeUpdate();
+            pstmt.setInt(1, newAccount.getAccountId());
+            pstmt.setString(2, newAccount.getAccountName());
+            pstmt.setDouble(3, newAccount.getBalance());
+            pstmt.setInt(4, currentUser.getId());
 
 
-            } catch (SQLException sqle){
-                sqle.printStackTrace();
-            }
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
         }
+    }
 
 
     private Set<Account> mapAccountResultSet(ResultSet rs) throws SQLException {
@@ -113,7 +113,7 @@ public class AccountRepo {
         Set<Account> accounts = new HashSet<>();
 
 
-        while(rs.next()) {
+        while (rs.next()) {
             Account temp = new Account();
             temp.setAccountId(rs.getInt("account_id"));
             temp.setAccountName(rs.getString("name"));
@@ -125,5 +125,27 @@ public class AccountRepo {
 
     }
 
+    public void updateBalance(double balance) {
+
+        Account currentAccount = app.getCurrentAccount();
+        try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
+
+            String sql = "UPDATE project0.user_accounts SET balance = ? WHERE account_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+
+            pstmt.setInt(1, (int) balance);
+            pstmt.setInt(2, app.getCurrentUser().getId());
+
+
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
 }
+
 

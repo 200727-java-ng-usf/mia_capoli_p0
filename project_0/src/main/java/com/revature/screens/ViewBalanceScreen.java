@@ -22,7 +22,7 @@ public class ViewBalanceScreen extends Screen {
         Account currentAccount = app.getCurrentAccount();
         AppUser currentUser = app.getCurrentUser();
 
-        System.out.println("Your balance is: " + currentAccount.getBalance());
+        System.out.println("Your balance is: $" + currentAccount.getBalance());
         System.out.println("1) Add Funds");
         System.out.println("2) Withdraw Funds");
         System.out.println("3) Go home");

@@ -1,36 +1,41 @@
 package com.revature.screens;
 
+import com.revature.exceptions.InvalidInputException;
+import com.revature.models.Account;
+import com.revature.services.AccountService;
 import com.revature.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import static com.revature.AppDriver.app;
+import static java.lang.Integer.parseInt;
+
 public class AddFundsScreen extends Screen{
 
-    private UserService userService;
+    private AccountService accountService;
 
-    public AddFundsScreen(UserService userService) {
+    public AddFundsScreen(AccountService accountService) {
         super("AddFundsScreen", "/addFunds");
-        this.userService = userService;
+        this.accountService = accountService;
     }
 
     @Override
     public void render() {
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            //TODO get proper logged in user
-            //AppUser loggedInUser = current AppUser();
+            Account currentAccount = app.getCurrentAccount();
 
-            //double balance = loggedInUser.getAccount.getBalance;
 
-            //how much would you like to add?
-            //get add balance check if valid
+            double temp;
 
-            //System.out.println("Your balance is now: " + balance);
-            //to do implement transaction add
-            //TODO implement navigation
+            System.out.println(" How much would you like to add? ");
 
+            temp = parseInt(app.getConsole().readLine());
+            accountService.addFunds(temp);
+            System.out.println("Your balance is now: " + currentAccount.getBalance());
+
+            app.getRouter().navigate("/Dashboard");
 
 
         } catch (Exception e) {

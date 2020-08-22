@@ -1,34 +1,40 @@
 package com.revature.screens;
 
+import com.revature.exceptions.InvalidInputException;
+import com.revature.models.Account;
+import com.revature.services.AccountService;
 import com.revature.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class WithdrawScreen extends Screen {
-    private UserService userService;
+import static com.revature.AppDriver.app;
+import static java.lang.Integer.parseInt;
 
-    public WithdrawScreen(UserService userService) {
+public class WithdrawScreen extends Screen {
+    private AccountService accountService;
+
+    public WithdrawScreen(AccountService accountService) {
         super("WithdrawFundsScreen", "/withdrawFunds");
-        this.userService = userService;
+        this.accountService = accountService;
     }
 
     @Override
     public void render() {
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
         try {
-            //TODO get proper logged in user
-            //AppUser loggedInUser = current AppUser();
+            Account currentAccount = app.getCurrentAccount();
 
-            //double balance = loggedInUser.getBalance;
+            double balance = currentAccount.getBalance();
+            double temp = 0.00d;
 
-            //how much would you like to withdraw?
-            //get withdraw balance check if valid
+            System.out.println(" How much would you like to withdraw? ");
 
-            //System.out.println("Your balance is now: " + balance);
-            //TODO implement navigation
+            temp = parseInt(app.getConsole().readLine());
+            accountService.withdrawFunds(temp);
+            System.out.println("Your balance is now: " + currentAccount.getBalance());
 
+            app.getRouter().navigate("/Dashboard");
 
         } catch (Exception e) {
             e.printStackTrace();

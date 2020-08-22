@@ -28,7 +28,7 @@ public class SelectAccountScreen extends Screen{
         Set<Account> accounts = accountService.returnUsersAccounts(currentUser);
 
         if (accounts == null) {
-            System.out.println("null");
+            System.out.println("");
         }
         for (Account userAccount : accounts) {
             System.out.println(userAccount);
