@@ -1,10 +1,6 @@
 package com.revature.screens;
 
-import com.revature.models.AppUser;
 import com.revature.services.UserService;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 import static com.revature.AppDriver.app;
 
@@ -20,7 +16,6 @@ public class LoginScreen extends Screen {
 
     @Override
     public void render() {
-        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
         String username, password;
 
         try {
@@ -33,6 +28,7 @@ public class LoginScreen extends Screen {
             userService.authenticate(username, password);
 
             if (app.isSessionValid()) {
+                //check if user has account
                 app.getRouter().navigate("/selectAccount");
             }
 
