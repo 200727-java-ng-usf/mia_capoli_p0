@@ -7,6 +7,8 @@ import com.revature.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import static com.revature.AppDriver.app;
 import static java.lang.Integer.parseInt;
@@ -14,6 +16,8 @@ import static java.lang.Integer.parseInt;
 public class AddFundsScreen extends Screen{
 
     private AccountService accountService;
+    NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
+
 
     public AddFundsScreen(AccountService accountService) {
         super("AddFundsScreen", "/addFunds");
@@ -33,7 +37,7 @@ public class AddFundsScreen extends Screen{
 
             temp = parseInt(app.getConsole().readLine());
             accountService.addFunds(temp);
-            System.out.println("Your balance is now: " + currentAccount.getBalance());
+            System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
 
             app.getRouter().navigate("/Dashboard");
 

@@ -31,7 +31,7 @@ public class SelectAccountScreen extends Screen{
             System.out.println("");
         }
         for (Account userAccount : accounts) {
-            System.out.println(userAccount);
+            System.out.println(userAccount.getAccountId());
         }
 
         System.out.println("Please enter the account number that you would like to access:");
