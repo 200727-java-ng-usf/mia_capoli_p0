@@ -130,7 +130,7 @@ public class AccountRepo {
         Account currentAccount = app.getCurrentAccount();
         try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
 
-            String sql = "UPDATE project0.user_accounts SET balance = ? WHERE account_id = ?";
+            String sql = "UPDATE project0.user_accounts SET balance = ? WHERE assoc_user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
 
