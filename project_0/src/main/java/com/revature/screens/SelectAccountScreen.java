@@ -40,13 +40,13 @@ public class SelectAccountScreen extends Screen {
             app.getRouter().navigate("/Dashboard");
 
         } catch (IOException | InvalidInputException e) {
-            System.out.println("Please enter a valid account number!");
+            System.err.println("Please enter a valid account number!");
             app.getRouter().navigate("/selectAccount");
         } catch (AuthenticatorException ae) {
-            System.out.println("No accounts exist for this user.");
+            System.err.println("No accounts exist for this user.");
             app.getRouter().navigate("/addAccount");
         } catch (Exception e) {
-            System.out.println("A problem occurred.");
+            System.err.println("A problem occurred.");
             app.getRouter().navigate("/selectAccount");
         }
     }

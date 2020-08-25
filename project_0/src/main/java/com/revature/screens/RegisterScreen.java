@@ -5,7 +5,7 @@ import com.revature.exceptions.InvalidInputException;
 import com.revature.models.AppUser;
 import com.revature.services.UserService;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
 
 import static com.revature.AppDriver.app;

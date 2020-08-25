@@ -109,7 +109,6 @@ public class AppUserRepo {
             temp.setFirstName(rs.getString("first_name"));
             temp.setLastName(rs.getString("last_name"));
             temp.setRole(Role.getByName(rs.getString("role_id")));
-            System.out.println(temp);
             users.add(temp);
         }
 
