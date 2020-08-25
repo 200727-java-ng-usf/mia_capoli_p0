@@ -1,14 +1,17 @@
 package com.revature.screens;
 
+import com.revature.exceptions.AuthenticatorException;
+import com.revature.exceptions.InvalidInputException;
 import com.revature.models.AppUser;
 import com.revature.services.UserService;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 import static com.revature.AppDriver.app;
 
-public class RegisterScreen extends Screen{
+public class RegisterScreen extends Screen {
 
     private UserService userService;
 
@@ -42,9 +45,15 @@ public class RegisterScreen extends Screen{
             if (app.isSessionValid()) {
                 app.getRouter().navigate("/addAccount");
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (AuthenticatorException ae) {
+            System.err.println("Provided username is already in use!");
+            app.getRouter().navigate("/register");
+        } catch (InvalidInputException ie) {
+            System.err.println("Invalid credentials given for registration.");
+            app.getRouter().navigate("/register");
+        } catch (IOException ioe) {
+            System.err.println("Invalid credentials given!");
+            app.getRouter().navigate("/register");
         }
 
     }

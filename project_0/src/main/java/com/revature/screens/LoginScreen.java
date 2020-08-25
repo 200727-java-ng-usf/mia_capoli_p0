@@ -1,6 +1,13 @@
 package com.revature.screens;
 
+import com.revature.exceptions.AuthenticatorException;
+import com.revature.exceptions.InvalidInputException;
 import com.revature.services.UserService;
+
+import javax.imageio.IIOException;
+import javax.security.sasl.AuthenticationException;
+
+import java.io.IOException;
 
 import static com.revature.AppDriver.app;
 
@@ -28,12 +35,18 @@ public class LoginScreen extends Screen {
             userService.authenticate(username, password);
 
             if (app.isSessionValid()) {
-                //check if user has account
                 app.getRouter().navigate("/selectAccount");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (AuthenticatorException ae) {
+            System.err.println("Provided user does not exist!");
+            app.getRouter().navigate("/login");
+        } catch (InvalidInputException ie) {
+            System.err.println("Invalid user credentials given!");
+            app.getRouter().navigate("/login");
+        } catch (IOException ioe) {
+            System.err.println("Invalid user credentials given!");
+            app.getRouter().navigate("/login");
         }
     }
 

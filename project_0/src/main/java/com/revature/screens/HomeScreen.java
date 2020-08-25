@@ -32,7 +32,7 @@ public class HomeScreen extends Screen {
                     app.setAppRunning(false);
                     break;
                 default:
-                    System.out.println("[LOG] - Invalid selection!");
+                    System.out.println("[ERROR] - Invalid selection!");
             }
 
         } catch (IOException e) {

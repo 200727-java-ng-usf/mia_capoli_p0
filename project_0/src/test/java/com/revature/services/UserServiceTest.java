@@ -1,4 +1,4 @@
-package com.revature.revabooks.services;
+package com.revature.services;
 
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
@@ -47,14 +47,10 @@ public class UserServiceTest {
 
     @Test
     public void authenticationWithValidCredentials() {
-        // Arrange
         AppUser expectedUser = new AppUser(1, "Adam", "Inn", "admin", "secret", Role.ADMIN);
         Mockito.when(mockedRepo.findUser("admin", "secret"))
                 .thenReturn(java.util.Optional.of(expectedUser));
-
-        //Act
-        AppUser actualResult = userService.authenticate("admin", "secret");
-        //Assert
+       AppUser actualResult = userService.authenticate("admin", "secret");
         Assert.assertEquals(expectedUser, actualResult);
     }
 
@@ -70,9 +66,7 @@ public class UserServiceTest {
 
     @Test(expected = AuthenticatorException.class)
     public void authenticationWithUnknownCredentials() {
-
         userService.authenticate("garbage", "user");
-
     }
 
     @Test
@@ -102,7 +96,7 @@ public class UserServiceTest {
         userService.registration(mockedFaultyAppUser);
 
     }
-    @Test(expected = InvalidInputException.class)
+    @Test(expected = AuthenticatorException.class)
     public void registrationUserExists() {
         AppUser mockedFaultyAppUser = new AppUser(1, "Adam", "Inn", "admin", "secret", Role.ADMIN );
 

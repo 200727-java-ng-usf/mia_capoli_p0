@@ -3,7 +3,6 @@ package com.revature.services;
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.models.Account;
-import com.revature.models.AppUser;
 import com.revature.repos.AccountRepo;
 
 import java.util.Optional;
@@ -16,32 +15,32 @@ public class AccountService {
     private AccountRepo accountRepo;
 
     public AccountService(AccountRepo repo) {
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
         accountRepo = repo;
     }
 
-    public void authenticate(int accountId, String accountName) {
+    public Account findUserByAccountId(int accountId) {
 
-        if (accountId == 0 || accountName == null || accountName.trim().equals("")) {
-            throw new AuthenticatorException("Invalid account credentials given!");
+        if (accountId == 0) {
+            throw new InvalidInputException("Invalid account credentials given!");
         }
-        Account authAccount = accountRepo.findAccountByCredentials(accountName, accountId)
+        Account _authAccount = accountRepo.findUserByAccountId(accountId)
                 .orElseThrow(AuthenticatorException::new);
 
+        app.setCurrentAccount(_authAccount);
+        return _authAccount;
 
-        app.setCurrentAccount(authAccount);
 
     }
 
     public void registration(Account newAccount) {
         if (!isAccountValid(newAccount)) {
-            throw new RuntimeException("Invalid credentials given for registration.");
+            throw new InvalidInputException("Invalid credentials given for registration.");
         }
 
         Optional<Account> existingAccount = accountRepo.findUserByAccountId(newAccount.getAccountId());
 
         if (existingAccount.isPresent()) {
-            throw new RuntimeException("Provided account id is already in use!");
+            throw new AuthenticatorException("Provided account id is already in use!");
         }
 
 
@@ -49,24 +48,9 @@ public class AccountService {
         app.setCurrentAccount(newAccount);
     }
 
-    public Set<Account> returnUsersAccounts(AppUser currentUser) {
-        currentUser = app.getCurrentUser();
+    public Set<Account> returnUsersAccounts() {
         Set<Account> usersAccounts = accountRepo.findUsersAccounts(app.getCurrentUser());
-
         return usersAccounts;
-
-    }
-
-    public Account findUserByAccountId(int accountId) {
-
-        Optional<Account> _account = accountRepo.findUserByAccountId(accountId);
-
-        if (!_account.isPresent()) {
-            throw new AuthenticatorException("That account does not exist!");
-        }
-        Account account = _account.get();
-        return account;
-
     }
 
     public double addFunds(double fundsToAdd) {
@@ -78,11 +62,8 @@ public class AccountService {
         } else {
             balance = balance + temp;
             currentAccount.setBalance(balance);
-
             accountRepo.updateBalance(balance);
         }
-
-
         return balance;
     }
 

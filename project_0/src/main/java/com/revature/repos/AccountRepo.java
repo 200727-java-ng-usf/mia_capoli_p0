@@ -80,7 +80,7 @@ public class AccountRepo {
 
             ResultSet rs = pstmt.executeQuery();
             _account = mapAccountResultSet(rs);
-            //make sure not null
+
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();

@@ -6,6 +6,7 @@ import com.revature.services.AccountService;
 import com.revature.services.UserService;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 import static com.revature.AppDriver.app;
@@ -40,8 +41,12 @@ public class AddAccountScreen extends Screen {
                 app.getRouter().navigate("/selectAccount");
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NumberFormatException nfe) {
+            System.err.println("Please enter a number!");
+            app.getRouter().navigate("/addAccount");
+        } catch (IOException ioe) {
+            System.err.println("Please enter a proper input!");
+            app.getRouter().navigate("/addAccount");
         }
 
     }

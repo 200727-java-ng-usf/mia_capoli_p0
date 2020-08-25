@@ -18,6 +18,13 @@ public class Account {
         this.balance = 0.00d;
     }
 
+    public Account(int accountId, String accountName, double balance) {
+        this.accountName = accountName;
+        this.accountId = accountId;
+        this.balance = balance;
+    }
+
+
     public String getAccountName() {
         return accountName;
     }

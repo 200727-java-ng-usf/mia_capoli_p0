@@ -34,6 +34,14 @@ public class AppUser {
         this.role = role;
     }
 
+    public AppUser(int id, String firstName, String lastName, String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
     public Integer getId() {
         return id;
     }

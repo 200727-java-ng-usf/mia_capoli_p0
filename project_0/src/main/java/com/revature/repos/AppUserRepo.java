@@ -37,7 +37,7 @@ public class AppUserRepo {
             return Optional.of(appUser);
 
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            System.err.println("Database Error!");
         }
 
         return _user;
@@ -53,23 +53,16 @@ public class AppUserRepo {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
-
             while(rs.next()) {
-                AppUser temp = new AppUser();
-                temp.setId(rs.getInt("id"));
-                temp.setUsername(rs.getString("username"));
-                temp.setPassword(rs.getString("password"));
-                temp.setFirstName(rs.getString("first_name"));
-                temp.setLastName(rs.getString("last_name"));
-                if (temp.getUsername() == username) {
+                AppUser temp = new AppUser(rs.getString("username"), rs.getString("password"), rs.getString("first_name"), rs.getString("last_name"));
+                if (temp.getUsername().equals(username)) {
                     _user = Optional.of(temp);
+                    return _user;
                 }
             }
 
-            return _user;
-
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            System.err.println("Database Error!");
         }
         return _user;
 
@@ -102,29 +95,29 @@ public class AppUserRepo {
 
             }
         } catch (SQLException sqle){
-            sqle.printStackTrace();
+            System.err.println("Database Error!");
         }
     }
 
-    private Set<AppUser> mapResultSet(ResultSet rs) throws SQLException {
-
-        Set<AppUser> users = new HashSet<>();
-
-
-        while(rs.next()) {
-            AppUser temp = new AppUser();
-            temp.setId(rs.getInt("id"));
-            temp.setUsername(rs.getString("username"));
-            temp.setPassword(rs.getString("password"));
-            temp.setFirstName(rs.getString("first_name"));
-            temp.setLastName(rs.getString("last_name"));
-            System.out.println(temp);
-            users.add(temp);
-        }
-
-        return users;
-
-    }
+//    private Set<AppUser> mapResultSet(ResultSet rs) throws SQLException {
+//
+//        Set<AppUser> users = new HashSet<>();
+//
+//
+//        while(rs.next()) {
+//            AppUser temp = new AppUser();
+//            temp.setId(rs.getInt("id"));
+//            temp.setUsername(rs.getString("username"));
+//            temp.setPassword(rs.getString("password"));
+//            temp.setFirstName(rs.getString("first_name"));
+//            temp.setLastName(rs.getString("last_name"));
+//            System.out.println(temp);
+//            users.add(temp);
+//        }
+//
+//        return users;
+//
+//    }
 
 
 }

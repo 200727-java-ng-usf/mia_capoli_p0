@@ -23,11 +23,9 @@ public class SelectAccountScreen extends Screen{
 
     @Override
     public void render() {
-        AppUser currentUser = app.getCurrentUser();
-        Set<Account> accounts = accountService.returnUsersAccounts(currentUser);
-
-        if (accounts == null) {
-            System.out.println("");
+        Set<Account> accounts = accountService.returnUsersAccounts();
+        if (accounts.isEmpty()) {
+            app.getRouter().navigate("/addAccount");
         }
         for (Account userAccount : accounts) {
             System.out.println(userAccount.getAccountId());

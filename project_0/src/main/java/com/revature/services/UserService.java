@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.exceptions.AuthenticatorException;
+import com.revature.exceptions.InvalidInputException;
 import com.revature.models.AppUser;
 import com.revature.models.Role;
 import com.revature.repos.AppUserRepo;
@@ -14,33 +15,37 @@ public class UserService {
     private AppUserRepo userRepo;
 
     public UserService(AppUserRepo repo) {
-        System.out.println("[LOG] - Instantiating " + this.getClass().getName());
         userRepo = repo;
-//        userRepo = new UserRepository(); // tight coupling! ~hard~ impossible to unit test
     }
 
-    public void authenticate(String username, String password) {
+    public AppUser authenticate(String username, String password) {
 
         if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
-            throw new AuthenticatorException("Invalid user credentials given!");
+            app.invalidateCurrentUser();
+            throw new InvalidInputException("Invalid user credentials given!");
         }
-        AppUser authUser = userRepo.findUser(username, password)
-                .orElseThrow(AuthenticatorException::new);
+        Optional<AppUser> authUser = (userRepo.findUser(username, password));
 
+        if (!authUser.isPresent()) {
+            app.invalidateCurrentUser();
+            throw new AuthenticatorException("No such user exists!");
+        }
 
-        app.setCurrentUser(authUser);
+        app.setCurrentUser(authUser.get());
 
+        return authUser.get();
     }
 
     public void registration(AppUser newUser) {
         if (!isUserValid(newUser)) {
-            throw new RuntimeException("Invalid credentials given for registration.");
+            app.invalidateCurrentUser();
+            throw new InvalidInputException("Invalid credentials given for registration.");
         }
 
         Optional<AppUser> _existingUser = userRepo.findUserByUsername(newUser.getUsername());
-
         if (_existingUser.isPresent()) {
-            throw new RuntimeException("Provided username is already in use!");
+            app.invalidateCurrentUser();
+            throw new AuthenticatorException("Provided username is already in use!");
         }
 
         newUser.setRole(Role.BASIC_MEMBER);

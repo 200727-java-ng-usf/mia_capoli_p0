@@ -1,4 +1,4 @@
-package com.revature.revabooks.util;
+package com.revature.util;
 
 import com.revature.util.ConnectionFactory;
 import org.junit.After;

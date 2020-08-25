@@ -8,9 +8,9 @@ import com.revature.screens.*;
 import com.revature.services.AccountService;
 import com.revature.services.UserService;
 
-import javax.xml.soap.SAAJMetaFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Optional;
 
 public class AppState {
     private BufferedReader console;
