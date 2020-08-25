@@ -33,7 +33,8 @@ public class HomeScreen extends Screen {
                     app.setAppRunning(false);
                     break;
                 default:
-                    System.out.println("[ERROR] - Invalid selection!");
+                    System.err.println("Invalid selection!");
+                    app.getRouter().navigate("/home");
             }
 
         } catch (IOException e) {
@@ -41,6 +42,7 @@ public class HomeScreen extends Screen {
             app.getRouter().navigate("/home");
         } catch (Exception e) {
             System.err.println("A problem occurred.");
+            app.getRouter().navigate("/home");
         }
     }
 }

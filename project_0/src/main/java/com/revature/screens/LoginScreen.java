@@ -47,6 +47,9 @@ public class LoginScreen extends Screen {
         } catch (IOException ioe) {
             System.err.println("Invalid user credentials given!");
             app.getRouter().navigate("/login");
+        } catch (Exception e) {
+            System.err.println("A problem occurred.");
+            app.getRouter().navigate("/login");
         }
     }
 

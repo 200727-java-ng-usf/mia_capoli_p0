@@ -47,14 +47,14 @@ public class AccountServiceTest {
         Account expectedAccount= new Account("MiaAccount", 92341);
         Mockito.when(mockedRepo.findUserByAccountId(92341))
                 .thenReturn(java.util.Optional.of(expectedAccount));
-        Account actualResult = accountService.findUserByAccountId(92341);
+        Account actualResult = accountService.findAccountByAccountId(92341);
         Assert.assertEquals(expectedAccount, actualResult);
     }
 
     @Test(expected = InvalidInputException.class)
     public void authenticationWithInvalidCredentials() {
 
-        accountService.findUserByAccountId(0);
+        accountService.findAccountByAccountId(0);
 
     }
 

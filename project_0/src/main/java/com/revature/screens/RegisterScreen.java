@@ -54,6 +54,9 @@ public class RegisterScreen extends Screen {
         } catch (IOException ioe) {
             System.err.println("Invalid credentials given!");
             app.getRouter().navigate("/register");
+        } catch (Exception e) {
+            System.err.println("A problem occurred.");
+            app.getRouter().navigate("/addAccount");
         }
 
     }

@@ -10,7 +10,6 @@ import com.revature.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Optional;
 
 public class AppState {
     private BufferedReader console;
@@ -79,6 +78,6 @@ public class AppState {
     }
 
     public boolean isSessionValid() {
-        return (this.currentUser != null);
+        return (this.currentUser != null || this.currentAccount != null);
     }
 }

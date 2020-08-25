@@ -108,7 +108,7 @@ public class AccountRepo {
 
 
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            System.err.println("Database Error!");
         }
     }
 
@@ -146,7 +146,7 @@ public class AccountRepo {
 
 
         } catch (SQLException sqle) {
-            sqle.printStackTrace();
+            System.err.println("Database Error!");
         }
     }
 

@@ -2,6 +2,8 @@ package com.revature.services;
 
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
+import com.revature.exceptions.NegativeException;
+import com.revature.exceptions.OverdraftException;
 import com.revature.models.Account;
 import com.revature.repos.AccountRepo;
 
@@ -18,7 +20,7 @@ public class AccountService {
         accountRepo = repo;
     }
 
-    public Account findUserByAccountId(int accountId) {
+    public Account findAccountByAccountId(int accountId) {
 
         if (accountId == 0) {
             throw new InvalidInputException("Invalid account credentials given!");
@@ -43,7 +45,6 @@ public class AccountService {
             throw new AuthenticatorException("Provided account id is already in use!");
         }
 
-
         accountRepo.save(newAccount);
         app.setCurrentAccount(newAccount);
     }
@@ -58,7 +59,7 @@ public class AccountService {
         double balance = currentAccount.getBalance();
         double temp = fundsToAdd;
         if (temp <= 0) {
-            throw new InvalidInputException("Please enter a positive, non-zero number!");
+            throw new NegativeException("Please enter a positive, non-zero number!");
         } else {
             balance = balance + temp;
             currentAccount.setBalance(balance);
@@ -72,9 +73,9 @@ public class AccountService {
         double balance = currentAccount.getBalance();
         double temp = fundsToAdd;
         if (temp <= 0) {
-            throw new InvalidInputException("Please enter a positive, non-zero number!");
+            throw new NegativeException("Please enter a positive, non-zero number!");
         } else if (balance < temp) {
-            throw new InvalidInputException("This account does not support overdrafting.");
+            throw new OverdraftException("This account does not support overdrafting.");
         } else {
             balance = balance - temp;
             currentAccount.setBalance(balance);

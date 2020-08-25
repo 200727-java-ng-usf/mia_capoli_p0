@@ -1,9 +1,11 @@
 package com.revature.models;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Account {
-
+    NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
     String accountName;
     int accountId;
     double balance;
@@ -65,10 +67,8 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
-                "accountName='" + accountName + '\'' +
-                ", accountId=" + accountId +
-                ", balance=" + balance +
-                '}';
+        return " Account Name: " + accountName +
+                ", Account Id: " + accountId +
+                ", Balance: " + nf.format(balance);
     }
 }

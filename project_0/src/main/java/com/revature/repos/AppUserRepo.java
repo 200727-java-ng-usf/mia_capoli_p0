@@ -1,16 +1,15 @@
 package com.revature.repos;
 
 import com.revature.models.AppUser;
-import com.revature.models.Role;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
+
 import java.util.Optional;
-import java.util.Set;
+
 
 public class AppUserRepo {
 
@@ -98,26 +97,5 @@ public class AppUserRepo {
             System.err.println("Database Error!");
         }
     }
-
-//    private Set<AppUser> mapResultSet(ResultSet rs) throws SQLException {
-//
-//        Set<AppUser> users = new HashSet<>();
-//
-//
-//        while(rs.next()) {
-//            AppUser temp = new AppUser();
-//            temp.setId(rs.getInt("id"));
-//            temp.setUsername(rs.getString("username"));
-//            temp.setPassword(rs.getString("password"));
-//            temp.setFirstName(rs.getString("first_name"));
-//            temp.setLastName(rs.getString("last_name"));
-//            System.out.println(temp);
-//            users.add(temp);
-//        }
-//
-//        return users;
-//
-//    }
-
 
 }

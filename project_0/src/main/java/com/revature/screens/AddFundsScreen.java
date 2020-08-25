@@ -1,8 +1,11 @@
 package com.revature.screens;
 
+import com.revature.exceptions.InvalidInputException;
+import com.revature.exceptions.NegativeException;
 import com.revature.models.Account;
 import com.revature.services.AccountService;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -38,10 +41,17 @@ public class AddFundsScreen extends Screen{
             app.getRouter().navigate("/Dashboard");
 
 
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException | IOException nfe) {
             System.err.println("Please enter a valid number!");
             app.getRouter().navigate("/addFunds");
+        } catch (InvalidInputException iie) {
+            System.err.println("Please enter a proper number.");
+            app.getRouter().navigate("/addFunds");
+        } catch (NegativeException nwe) {
+            System.err.println("Please enter a positive, non-zero number!");
+            app.getRouter().navigate("/addFunds");
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.println("A problem occurred.");
             app.getRouter().navigate("/addFunds");
         }

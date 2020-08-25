@@ -1,6 +1,7 @@
 package com.revature.screens;
 
 
+import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.models.Account;
 
@@ -44,6 +45,9 @@ public class AddAccountScreen extends Screen {
             app.getRouter().navigate("/addAccount");
         } catch (IOException | InvalidInputException ioe) {
             System.err.println("Please enter a proper input!");
+            app.getRouter().navigate("/addAccount");
+        } catch (AuthenticatorException ae) {
+            System.err.println("Provided account id is already in use!");
             app.getRouter().navigate("/addAccount");
         } catch (Exception e) {
             System.err.println("A problem occurred.");
