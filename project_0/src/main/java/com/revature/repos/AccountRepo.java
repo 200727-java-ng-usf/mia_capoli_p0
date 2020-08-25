@@ -16,27 +16,13 @@ import static com.revature.AppDriver.app;
 
 public class AccountRepo {
 
-
-//    public Optional<Account> findAccountByCredentials(String name, int accountId) {
-//
-//        Optional<Account> _account = Optional.empty();
-//        try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
-//            String sql = "SELECT * FROM project0.user_accounts WHERE account_id = ? AND name = ?";
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//            pstmt.setInt(1, accountId);
-//            pstmt.setString(2, name);
-//            ResultSet rs = pstmt.executeQuery();
-//
-//            _account = mapAccountResultSet(rs).stream().findFirst();
-//
-//        } catch (SQLException sqle) {
-//            sqle.printStackTrace();
-//        }
-//
-//        return _account;
-//    }
-
-    public Optional<Account> findUserByAccountId(int accountId) {
+    /**
+     * Finding a user in the Repository by the provided account id.
+     *
+     * @param accountId
+     * @return
+     */
+    public Optional<Account> findAccountByAccountId(int accountId) {
 
         Optional<Account> _account = Optional.empty();
 
@@ -46,14 +32,14 @@ public class AccountRepo {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
-
-            while(rs.next()) {
+            //loop through result set and obtain specific Account Assoc with user.
+//            while(rs.next()) {
                 Account temp = new Account();
                 temp.setAccountId(rs.getInt("account_id"));
 
                 if (temp.getAccountId() == accountId) {
                     _account = Optional.of(temp);
-                }
+//                }
             }
 
 

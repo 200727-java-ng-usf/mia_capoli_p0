@@ -5,12 +5,20 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class Account {
+
+    /**
+     * Account Object Pojo
+     * An object created to hold accounts and their properties.
+     */
+
+    //Account fields
     NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);
     String accountName;
     int accountId;
     double balance;
-    //TODO implement connection to appuser
 
+
+    //Account Constructors
     public Account() {
     }
 
@@ -26,6 +34,8 @@ public class Account {
         this.balance = balance;
     }
 
+
+    //Account getters and setters
     public String getAccountName() {
         return accountName;
     }
@@ -50,6 +60,8 @@ public class Account {
         this.balance = balance;
     }
 
+
+    //Account method overrides.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -24,15 +24,14 @@ public class SelectAccountScreen extends Screen {
 
     @Override
     public void render() {
-        Set<Account> accountSet = accountService.returnUsersAccounts(app.getCurrentUser().getId());
-
-        for (Account userAccount : accountSet) {
-            System.out.println(userAccount.toString());
-        }
-
-        System.out.println("Please enter the account number that you would like to access:");
-
         try {
+            Set<Account> accountSet = accountService.returnUsersAccounts(app.getCurrentUser().getId());
+
+            for (Account userAccount : accountSet) {
+                System.out.println(userAccount.toString());
+            }
+
+            System.out.println("Please enter the account number that you would like to access:");
             System.out.print("> ");
             int userSelection = Integer.parseInt(app.getConsole().readLine().trim());
             Account currentAccount = accountService.findAccountByAccountId(userSelection);
@@ -41,13 +40,13 @@ public class SelectAccountScreen extends Screen {
             app.getRouter().navigate("/Dashboard");
 
         } catch (IOException | InvalidInputException e) {
-            System.err.println("Please enter a valid account number!");
+            System.out.println("Please enter a valid account number!");
             app.getRouter().navigate("/selectAccount");
         } catch (AuthenticatorException ae) {
-            System.err.println("No accounts exist for this user.");
+            System.out.println("No accounts exist for this user.");
             app.getRouter().navigate("/addAccount");
         } catch (Exception e) {
-            System.err.println("A problem occurred.");
+            System.out.println("A problem occurred.");
             app.getRouter().navigate("/selectAccount");
         }
     }

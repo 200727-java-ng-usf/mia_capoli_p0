@@ -39,16 +39,14 @@ public class LoginScreen extends Screen {
             }
 
         } catch (AuthenticatorException ae) {
-            System.err.println("Provided user does not exist!");
+            System.out.println("Provided user does not exist!");
             app.getRouter().navigate("/login");
-        } catch (InvalidInputException ie) {
-            System.err.println("Invalid user credentials given!");
-            app.getRouter().navigate("/login");
-        } catch (IOException ioe) {
-            System.err.println("Invalid user credentials given!");
+        } catch (InvalidInputException | IOException ie) {
+            System.out.println("Invalid user credentials given!");
             app.getRouter().navigate("/login");
         } catch (Exception e) {
-            System.err.println("A problem occurred.");
+            e.printStackTrace();
+            System.out.println("A problem occurred.");
             app.getRouter().navigate("/login");
         }
     }

@@ -3,7 +3,12 @@ package com.revature.models;
 import java.util.Objects;
 
 public class AppUser {
-    //AppUser POJO
+    /**
+     * Appuser Object Pojo
+     * An object created to hold users and their properties.
+     */
+
+    //AppUser fields
     private Integer id;
     private String username;
     private String password;
@@ -11,14 +16,9 @@ public class AppUser {
     private String lastName;
     private Role role;
 
-
+    //AppUser constructors
     public AppUser() {
 
-    }
-
-    public AppUser(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
     public AppUser(String username, String password, String firstName, String lastName) {
@@ -29,10 +29,6 @@ public class AppUser {
         this.role = Role.BASIC_MEMBER;
     }
 
-    public AppUser(String username, String password, String firstName, String lastName, Role role) {
-        this(firstName, lastName, username, password);
-        this.role = role;
-    }
 
     public AppUser(int id, String firstName, String lastName, String username, String password, Role role) {
         this.username = username;
@@ -42,6 +38,13 @@ public class AppUser {
         this.role = role;
     }
 
+    public AppUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+
+    //AppUser getters and setters
     public Integer getId() {
         return id;
     }
@@ -90,20 +93,23 @@ public class AppUser {
         this.role = role;
     }
 
+    //AppUser Method overrides.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return Objects.equals(username, appUser.username) &&
+        return Objects.equals(id, appUser.id) &&
+                Objects.equals(username, appUser.username) &&
                 Objects.equals(password, appUser.password) &&
                 Objects.equals(firstName, appUser.firstName) &&
-                Objects.equals(lastName, appUser.lastName);
+                Objects.equals(lastName, appUser.lastName) &&
+                role == appUser.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, firstName, lastName);
+        return Objects.hash(id, username, password, firstName, lastName, role);
     }
 
     @Override

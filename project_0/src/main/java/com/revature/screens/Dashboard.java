@@ -38,6 +38,9 @@ public class Dashboard extends Screen{
                 case "4":
                     app.getRouter().navigate("/home");
                     break;
+                case "5":
+                    app.getRouter().navigate("/addAccount");
+                    break;
                 default:
                     System.err.println("Invalid selection!");
                     app.getRouter().navigate("/Dashboard");

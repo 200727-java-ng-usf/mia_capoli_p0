@@ -20,20 +20,17 @@ public class UserService {
 
     public AppUser authenticate(String username, String password) {
 
-        if (username == null || username.trim().equals("") || password == null || password.trim().equals("")) {
+        Optional<AppUser> _authUser = (userRepo.findUser(username, password));
+
+        if (!_authUser.isPresent()) {
             app.invalidateCurrentUser();
-            throw new InvalidInputException("Invalid user credentials given!");
-        }
-        Optional<AppUser> authUser = (userRepo.findUser(username, password));
+            throw new AuthenticatorException();
+        } else {
+            app.setCurrentUser(_authUser.get());
 
-        if (!authUser.isPresent()) {
-            app.invalidateCurrentUser();
-            throw new AuthenticatorException("No such user exists!");
         }
 
-        app.setCurrentUser(authUser.get());
-
-        return authUser.get();
+        return _authUser.get();
     }
 
     public void registration(AppUser newUser) {

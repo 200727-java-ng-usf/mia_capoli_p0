@@ -1,7 +1,10 @@
 package com.revature.models;
 
 public enum Role {
-    // values declared within enums are constants and are comma separated
+    /**
+     * Role Object
+     * For use in further development, to assign specific allowances to users.
+     */
     ADMIN("Admin"),
     MANAGER("Manager"),
     PREMIUM_MEMBER("Premium Member"),

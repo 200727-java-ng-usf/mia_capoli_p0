@@ -46,10 +46,17 @@ public class AccountServiceTest {
     @Test
     public void findUserByAccountID() {
         Account expectedAccount= new Account("MiaAccount", 92341);
-        Mockito.when(mockedRepo.findUserByAccountId(92341))
+        Mockito.when(mockedRepo.findAccountByAccountId(92341))
                 .thenReturn(java.util.Optional.of(expectedAccount));
         Account actualResult = accountService.findAccountByAccountId(92341);
         Assert.assertEquals(expectedAccount, actualResult);
+    }
+
+    @Test(expected = AuthenticatorException.class)
+    public void findUserByAccountIDNoAccountExists() {
+
+        accountService.findAccountByAccountId(92341);
+
     }
 
     @Test(expected = InvalidInputException.class)
@@ -77,7 +84,7 @@ public class AccountServiceTest {
     public void registrationAccountExists() {
         Account mockAccount = new Account(12345, "AdamAccount", 10.00d);
 
-        Mockito.when(mockedRepo.findUserByAccountId(12345))
+        Mockito.when(mockedRepo.findAccountByAccountId(12345))
                 .thenReturn(Optional.of(mockAccount));
 
         accountService.registration(new Account("AdamAccount", 12345));
@@ -116,6 +123,29 @@ public class AccountServiceTest {
         app.setCurrentAccount(mockAccount);
         accountService.fundsUpdate(false, 0);
 
+    }
+
+    @Test
+    public void returnUsersAccountsTestReturnAccounts() {
+
+        Mockito.when(mockedRepo.findUsersAccounts(12345))
+                .thenReturn(mockAccounts);
+
+        accountService.returnUsersAccounts(12345);
+        Assert.assertNotNull(mockAccounts);
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void returnUsersAccountsTestInvalidUserID() {
+
+        accountService.returnUsersAccounts(0);
+    }
+
+
+    @Test(expected = AuthenticatorException.class)
+    public void returnUsersAccountsTestEmptyAccounts() {
+
+        accountService.returnUsersAccounts(12345);
     }
 
 

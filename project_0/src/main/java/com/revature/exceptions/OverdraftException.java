@@ -2,7 +2,7 @@ package com.revature.exceptions;
 
 public class OverdraftException extends RuntimeException{
     /**
-     *   OverdraftException: Used because this banking application does not support overdtafting.
+     *   OverdraftException: Used because this banking application does not support overdrafting.
      */
     public OverdraftException(String message) {
         super(message);
