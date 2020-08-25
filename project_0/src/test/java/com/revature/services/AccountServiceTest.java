@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
+import com.revature.exceptions.NegativeException;
 import com.revature.models.Account;
 
 import com.revature.repos.AccountRepo;
@@ -87,16 +88,16 @@ public class AccountServiceTest {
     public void addFundsSuccessful() {
         Account mockAccount = new Account(12345, "AdamAccount", 10.00d);
         app.setCurrentAccount(mockAccount);
-        double actualResult = accountService.addFunds(10);
+        double actualResult = accountService.fundsUpdate(true, 10);
         Assert.assertEquals(20, actualResult, .001);
 
     }
 
-    @Test(expected = InvalidInputException.class)
+    @Test(expected = NegativeException.class)
     public void addFundsZero() {
         Account mockAccount = new Account(12345, "AdamAccount", 10.00d);
         app.setCurrentAccount(mockAccount);
-        double actualResult = accountService.addFunds(0);
+        accountService.fundsUpdate(true, 0);
 
     }
 
@@ -104,16 +105,16 @@ public class AccountServiceTest {
     public void withdrawFundsSuccessful() {
         Account mockAccount = new Account(12345, "AdamAccount", 10.00d);
         app.setCurrentAccount(mockAccount);
-        double actualResult = accountService.withdrawFunds(10);
+        double actualResult = accountService.fundsUpdate(false, 10);
         Assert.assertEquals(0, actualResult, .001);
 
     }
 
-    @Test(expected = InvalidInputException.class)
+    @Test(expected = NegativeException.class)
     public void withdrawFundsZero() {
         Account mockAccount = new Account(12345, "AdamAccount", 10.00d);
         app.setCurrentAccount(mockAccount);
-        accountService.addFunds(0);
+        accountService.fundsUpdate(false, 0);
 
     }
 

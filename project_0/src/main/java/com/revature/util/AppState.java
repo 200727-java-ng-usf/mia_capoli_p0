@@ -17,6 +17,7 @@ public class AppState {
     private ScreenRouter router;
     private boolean appRunning;
     private Account currentAccount;
+    private boolean add;
 
 
     public AppState() {
@@ -79,5 +80,13 @@ public class AppState {
 
     public boolean isSessionValid() {
         return (this.currentUser != null || this.currentAccount != null);
+    }
+
+    public boolean isAdd() {
+        return add;
+    }
+
+    public void setAdd(boolean falseAdd) {
+        this.add = add;
     }
 }

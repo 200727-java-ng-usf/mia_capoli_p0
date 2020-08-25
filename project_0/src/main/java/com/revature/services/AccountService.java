@@ -6,6 +6,9 @@ import com.revature.exceptions.NegativeException;
 import com.revature.exceptions.OverdraftException;
 import com.revature.models.Account;
 import com.revature.repos.AccountRepo;
+import com.revature.screens.HomeScreen;
+import com.revature.screens.Screen;
+import com.revature.screens.WithdrawScreen;
 
 import java.util.Optional;
 import java.util.Set;
@@ -22,14 +25,17 @@ public class AccountService {
 
     public Account findAccountByAccountId(int accountId) {
 
-        if (accountId == 0) {
+        if (accountId <= 0) {
             throw new InvalidInputException("Invalid account credentials given!");
         }
-        Account _authAccount = accountRepo.findUserByAccountId(accountId)
-                .orElseThrow(AuthenticatorException::new);
+        Optional<Account> _authAccount = accountRepo.findUserByAccountId(accountId);
 
-        app.setCurrentAccount(_authAccount);
-        return _authAccount;
+        if (!_authAccount.isPresent()) {
+            throw new AuthenticatorException("No such account exists!");
+        }
+
+        app.setCurrentAccount(_authAccount.get());
+        return _authAccount.get();
 
 
     }
@@ -49,42 +55,51 @@ public class AccountService {
         app.setCurrentAccount(newAccount);
     }
 
-    public Set<Account> returnUsersAccounts() {
-        Set<Account> usersAccounts = accountRepo.findUsersAccounts(app.getCurrentUser());
+    public Set<Account> returnUsersAccounts(int currentUserId) {
+
+        if (currentUserId <= 0) {
+            throw new InvalidInputException("Please enter a positive, non-zero number!");
+        }
+
+        Set<Account> usersAccounts = accountRepo.findUsersAccounts(currentUserId);
+
+        if (usersAccounts.isEmpty()) {
+            throw new AuthenticatorException("No accounts exist for this user.");
+        }
         return usersAccounts;
     }
 
-    public double addFunds(double fundsToAdd) {
-        Account currentAccount = app.getCurrentAccount();
-        double balance = currentAccount.getBalance();
-        double temp = fundsToAdd;
-        if (temp <= 0) {
-            throw new NegativeException("Please enter a positive, non-zero number!");
-        } else {
-            balance = balance + temp;
-            currentAccount.setBalance(balance);
-            accountRepo.updateBalance(balance);
-        }
-        return balance;
-    }
+//    public double addFunds(double fundsToAdd) {
+//        Account currentAccount = app.getCurrentAccount();
+//        double balance = currentAccount.getBalance();
+//        double temp = fundsToAdd;
+//        if (temp <= 0) {
+//            throw new NegativeException("Please enter a positive, non-zero number!");
+//        } else {
+//            balance = balance + temp;
+//            currentAccount.setBalance(balance);
+//            accountRepo.updateBalance(balance);
+//        }
+//        return balance;
+//    }
 
-    public double withdrawFunds(double fundsToAdd) {
-        Account currentAccount = app.getCurrentAccount();
-        double balance = currentAccount.getBalance();
-        double temp = fundsToAdd;
-        if (temp <= 0) {
-            throw new NegativeException("Please enter a positive, non-zero number!");
-        } else if (balance < temp) {
-            throw new OverdraftException("This account does not support overdrafting.");
-        } else {
-            balance = balance - temp;
-            currentAccount.setBalance(balance);
-            accountRepo.updateBalance(balance);
-        }
-
-
-        return balance;
-    }
+//    public double withdrawFunds(double fundsToAdd) {
+//        Account currentAccount = app.getCurrentAccount();
+//        double balance = currentAccount.getBalance();
+//        double temp = fundsToAdd;
+//        if (temp <= 0) {
+//            throw new NegativeException("Please enter a positive, non-zero number!");
+//        } else if (balance < temp) {
+//            throw new OverdraftException("This account does not support overdrafting.");
+//        } else {
+//            balance = balance - temp;
+//            currentAccount.setBalance(balance);
+//            accountRepo.updateBalance(balance);
+//        }
+//
+//
+//        return balance;
+//    }
 
     public boolean isAccountValid(Account account) {
         if (account == null) return false;
@@ -93,4 +108,22 @@ public class AccountService {
         return true;
     }
 
+
+    public double fundsUpdate(boolean isAdd, double funds) {
+        Account currentAccount = app.getCurrentAccount();
+        double balance = currentAccount.getBalance();
+        double temp = funds;
+        if (temp <= 0) {
+            throw new NegativeException("Please enter a positive, non-zero number!");
+        } else {
+            if (isAdd) {
+                balance = balance + temp;
+            } else {
+                balance = balance - temp;
+            }
+            currentAccount.setBalance(balance);
+            accountRepo.updateBalance(balance);
+        }
+        return balance;
+    }
 }

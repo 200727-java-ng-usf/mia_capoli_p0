@@ -13,7 +13,6 @@ public class HomeScreen extends Screen {
 
     @Override
     public void render() {
-
         System.out.println("Welcome to the Bank of Capoli!\n");
         System.out.println("1) Login");
         System.out.println("2) Register");

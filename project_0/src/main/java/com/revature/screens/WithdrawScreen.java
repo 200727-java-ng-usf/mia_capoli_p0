@@ -11,7 +11,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 import static com.revature.AppDriver.app;
-import static java.lang.Integer.parseInt;
 
 public class WithdrawScreen extends Screen {
     private AccountService accountService;
@@ -34,7 +33,7 @@ public class WithdrawScreen extends Screen {
             System.out.println(" How much would you like to withdraw? ");
 
             temp = Double.parseDouble(app.getConsole().readLine());
-            accountService.withdrawFunds(temp);
+            accountService.fundsUpdate(false, temp);
             System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
 
             app.getRouter().navigate("/Dashboard");

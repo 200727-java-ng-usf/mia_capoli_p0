@@ -29,13 +29,12 @@ public class AddFundsScreen extends Screen{
         try {
             Account currentAccount = app.getCurrentAccount();
 
-
             double temp = 0.00;
 
             System.out.println(" How much would you like to add? ");
 
             temp =  Double.parseDouble(app.getConsole().readLine());
-            accountService.addFunds(temp);
+            accountService.fundsUpdate(true, temp);
             System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
 
             app.getRouter().navigate("/Dashboard");

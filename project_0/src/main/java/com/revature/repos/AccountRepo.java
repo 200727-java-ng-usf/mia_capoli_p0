@@ -66,7 +66,7 @@ public class AccountRepo {
     }
 
 
-    public Set<Account> findUsersAccounts(AppUser currentUser) {
+    public Set<Account> findUsersAccounts(int currentUserId) {
 
         Set<Account> _account = new HashSet<>();
 
@@ -74,7 +74,7 @@ public class AccountRepo {
 
             String sql = "SELECT * FROM project0.user_accounts WHERE assoc_user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, currentUser.getId());
+            pstmt.setInt(1, currentUserId);
 
             ResultSet rs = pstmt.executeQuery();
             _account = mapAccountResultSet(rs);

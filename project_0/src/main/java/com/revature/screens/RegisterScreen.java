@@ -7,7 +7,6 @@ import com.revature.services.UserService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import static com.revature.AppDriver.app;
 
