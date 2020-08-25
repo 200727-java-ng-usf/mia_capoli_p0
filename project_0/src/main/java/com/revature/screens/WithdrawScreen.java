@@ -25,12 +25,11 @@ public class WithdrawScreen extends Screen {
         try {
             Account currentAccount = app.getCurrentAccount();
 
-            double balance = currentAccount.getBalance();
-            double temp = 0.00d;
+            double temp;
 
             System.out.println(" How much would you like to withdraw? ");
 
-            temp = parseInt(app.getConsole().readLine());
+            temp = Double.parseDouble(app.getConsole().readLine());
             accountService.withdrawFunds(temp);
             System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
 

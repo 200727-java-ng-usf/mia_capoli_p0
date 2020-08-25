@@ -24,7 +24,6 @@ public class Account {
         this.balance = balance;
     }
 
-
     public String getAccountName() {
         return accountName;
     }
@@ -63,10 +62,12 @@ public class Account {
         return Objects.hash(accountId, balance);
     }
 
+
     @Override
     public String toString() {
         return "Account{" +
-                "accountId=" + accountId +
+                "accountName='" + accountName + '\'' +
+                ", accountId=" + accountId +
                 ", balance=" + balance +
                 '}';
     }

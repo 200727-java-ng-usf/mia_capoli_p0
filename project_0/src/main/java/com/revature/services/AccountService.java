@@ -73,7 +73,7 @@ public class AccountService {
         double temp = fundsToAdd;
         if (temp <= 0) {
             throw new InvalidInputException("Please enter a positive, non-zero number!");
-        } else if (balance < temp ){
+        } else if (balance < temp) {
             throw new InvalidInputException("This account does not support overdrafting.");
         } else {
             balance = balance - temp;

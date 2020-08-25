@@ -1,13 +1,13 @@
 package com.revature.screens;
 
-import com.revature.models.Account;
-import com.revature.models.AppUser;
-import com.revature.services.AccountService;
-import com.revature.services.UserService;
 
-import java.io.BufferedReader;
+import com.revature.exceptions.InvalidInputException;
+import com.revature.models.Account;
+
+import com.revature.services.AccountService;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
+
 
 import static com.revature.AppDriver.app;
 
@@ -25,8 +25,6 @@ public class AddAccountScreen extends Screen {
     public void render() {
         int accountId;
         String accountName;
-
-
         try {
             System.out.println("Add a bank account!");
             System.out.println("Please enter your desired Account Id: ");
@@ -44,8 +42,11 @@ public class AddAccountScreen extends Screen {
         } catch (NumberFormatException nfe) {
             System.err.println("Please enter a number!");
             app.getRouter().navigate("/addAccount");
-        } catch (IOException ioe) {
+        } catch (IOException | InvalidInputException ioe) {
             System.err.println("Please enter a proper input!");
+            app.getRouter().navigate("/addAccount");
+        } catch (Exception e) {
+            System.err.println("A problem occurred.");
             app.getRouter().navigate("/addAccount");
         }
 

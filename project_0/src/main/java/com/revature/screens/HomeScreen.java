@@ -1,5 +1,7 @@
 package com.revature.screens;
 
+import com.revature.util.ScreenRouter;
+
 import java.io.IOException;
 import static com.revature.AppDriver.app;
 
@@ -16,7 +18,6 @@ public class HomeScreen extends Screen {
         System.out.println("1) Login");
         System.out.println("2) Register");
         System.out.println("3) Exit Application");
-
         try {
             System.out.print("> ");
             String userSelection = app.getConsole().readLine().trim();
@@ -36,7 +37,10 @@ public class HomeScreen extends Screen {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Please enter a valid selection!");
+            app.getRouter().navigate("/home");
+        } catch (Exception e) {
+            System.err.println("A problem occurred.");
         }
     }
 }

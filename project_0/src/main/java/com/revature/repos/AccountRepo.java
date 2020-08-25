@@ -2,7 +2,6 @@ package com.revature.repos;
 
 import com.revature.models.Account;
 import com.revature.models.AppUser;
-import com.revature.models.Role;
 import com.revature.util.ConnectionFactory;
 
 import java.sql.Connection;
@@ -12,31 +11,30 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.zip.ZipEntry;
 
 import static com.revature.AppDriver.app;
 
 public class AccountRepo {
 
 
-    public Optional<Account> findAccountByCredentials(String name, int accountId) {
-
-        Optional<Account> _account = Optional.empty();
-        try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
-            String sql = "SELECT * FROM project0.user_accounts WHERE account_id = ? AND name = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, accountId);
-            pstmt.setString(2, name);
-            ResultSet rs = pstmt.executeQuery();
-
-            _account = mapAccountResultSet(rs).stream().findFirst();
-
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        }
-
-        return _account;
-    }
+//    public Optional<Account> findAccountByCredentials(String name, int accountId) {
+//
+//        Optional<Account> _account = Optional.empty();
+//        try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
+//            String sql = "SELECT * FROM project0.user_accounts WHERE account_id = ? AND name = ?";
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//            pstmt.setInt(1, accountId);
+//            pstmt.setString(2, name);
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            _account = mapAccountResultSet(rs).stream().findFirst();
+//
+//        } catch (SQLException sqle) {
+//            sqle.printStackTrace();
+//        }
+//
+//        return _account;
+//    }
 
     public Optional<Account> findUserByAccountId(int accountId) {
 

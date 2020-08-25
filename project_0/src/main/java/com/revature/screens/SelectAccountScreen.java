@@ -2,6 +2,7 @@ package com.revature.screens;
 
 import com.revature.models.Account;
 import com.revature.models.AppUser;
+
 import static com.revature.AppDriver.app;
 
 import com.revature.services.AccountService;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.Set;
 
 
-public class SelectAccountScreen extends Screen{
+public class SelectAccountScreen extends Screen {
 
     private AccountService accountService;
 
@@ -20,35 +21,37 @@ public class SelectAccountScreen extends Screen{
     }
 
 
-
     @Override
     public void render() {
         Set<Account> accounts = accountService.returnUsersAccounts();
         if (accounts.isEmpty()) {
             app.getRouter().navigate("/addAccount");
+        } else {
+            for (Account userAccount : accounts) {
+                System.out.println(userAccount.getAccountId());
+            }
+
+            System.out.println("Please enter the account number that you would like to access:");
+
+            try {
+                System.out.print("> ");
+                int userSelection = Integer.parseInt(app.getConsole().readLine().trim());
+                Account currentAccount = accountService.findUserByAccountId(userSelection);
+
+
+                app.setCurrentAccount(currentAccount);
+                app.getRouter().navigate("/Dashboard");
+
+
+            } catch (IOException e) {
+                System.err.println("Please enter a valid account number!");
+                app.getRouter().navigate("/selectAccount");
+            } catch (Exception e) {
+                System.err.println("A problem occurred.");
+            }
+
+
         }
-        for (Account userAccount : accounts) {
-            System.out.println(userAccount.getAccountId());
-        }
-
-        System.out.println("Please enter the account number that you would like to access:");
-
-        try {
-            System.out.print("> ");
-            int userSelection = Integer.parseInt(app.getConsole().readLine().trim());
-            Account currentAccount = accountService.findUserByAccountId(userSelection);
-
-
-            app.setCurrentAccount(currentAccount);
-            app.getRouter().navigate("/Dashboard");
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        
-
     }
 
 

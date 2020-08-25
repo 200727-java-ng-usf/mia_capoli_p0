@@ -1,17 +1,13 @@
 package com.revature.screens;
 
-import com.revature.exceptions.InvalidInputException;
 import com.revature.models.Account;
 import com.revature.services.AccountService;
-import com.revature.services.UserService;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 import static com.revature.AppDriver.app;
-import static java.lang.Integer.parseInt;
+
 
 public class AddFundsScreen extends Screen{
 
@@ -31,19 +27,23 @@ public class AddFundsScreen extends Screen{
             Account currentAccount = app.getCurrentAccount();
 
 
-            double temp;
+            double temp = 0.00;
 
             System.out.println(" How much would you like to add? ");
 
-            temp = parseInt(app.getConsole().readLine());
+            temp =  Double.parseDouble(app.getConsole().readLine());
             accountService.addFunds(temp);
             System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
 
             app.getRouter().navigate("/Dashboard");
 
 
+        } catch (NumberFormatException nfe) {
+            System.err.println("Please enter a valid number!");
+            app.getRouter().navigate("/addFunds");
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println("A problem occurred.");
+            app.getRouter().navigate("/addFunds");
         }
     }
 
