@@ -3,9 +3,7 @@ package com.revature.services;
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.models.AppUser;
-import com.revature.models.Role;
 import com.revature.repos.AppUserRepo;
-import com.revature.services.UserService;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -33,10 +31,10 @@ public class UserServiceTest {
     @Before
     public void setup() {
         userService = new UserService(mockedRepo);
-        mockUsers.add(new AppUser(1, "Adam", "Inn", "admin", "secret", Role.ADMIN ));
-        mockUsers.add(new AppUser(2, "Manny", "Gerr", "mann@", "manager", Role.MANAGER ));
-        mockUsers.add(new AppUser(3, "Alice", "Anderson", "aandserson", "password", Role.BASIC_MEMBER ));
-        mockUsers.add(new AppUser(4, "Bob", "Bailey", "bbailey", "dev", Role.PREMIUM_MEMBER ));
+        mockUsers.add(new AppUser(1, "Adam", "Inn", "admin", "secret"));
+        mockUsers.add(new AppUser(2, "Manny", "Gerr", "mann@", "manager"));
+        mockUsers.add(new AppUser(3, "Alice", "Anderson", "aandserson", "password"));
+        mockUsers.add(new AppUser(4, "Bob", "Bailey", "bbailey", "dev"));
     }
 
     @After
@@ -47,14 +45,14 @@ public class UserServiceTest {
 
     @Test
     public void authenticationWithValidCredentials() {
-        AppUser expectedUser = new AppUser(1, "Adam", "Inn", "admin", "secret", Role.ADMIN);
+        AppUser expectedUser = new AppUser(1, "Adam", "Inn", "admin", "secret");
         Mockito.when(mockedRepo.findUser("admin", "secret"))
                 .thenReturn(java.util.Optional.of(expectedUser));
        AppUser actualResult = userService.authenticate("admin", "secret");
         Assert.assertEquals(expectedUser, actualResult);
     }
 
-    @Test(expected = InvalidInputException.class)
+    @Test(expected = AuthenticatorException.class)
     public void authenticationWithInvalidCredentials() {
         //no arrange
 
@@ -98,7 +96,7 @@ public class UserServiceTest {
     }
     @Test(expected = AuthenticatorException.class)
     public void registrationUserExists() {
-        AppUser mockedFaultyAppUser = new AppUser(1, "Adam", "Inn", "admin", "secret", Role.ADMIN );
+        AppUser mockedFaultyAppUser = new AppUser(1, "Adam", "Inn", "admin", "secret");
 
         Mockito.when(mockedRepo.findUserByUsername("admin"))
                 .thenReturn(Optional.of(mockedFaultyAppUser));

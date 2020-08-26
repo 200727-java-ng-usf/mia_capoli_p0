@@ -28,7 +28,7 @@ public class AddAccountScreen extends Screen {
         String accountName;
         try {
             System.out.println("Add a bank account!");
-            System.out.println("Please enter your desired Account Id: ");
+            System.out.println("Please up to 9 digits for your desired Account Id: ");
             accountId = Integer.parseInt(app.getConsole().readLine());
             System.out.println("Please enter the account name: ");
             accountName = app.getConsole().readLine();
@@ -41,7 +41,7 @@ public class AddAccountScreen extends Screen {
             }
 
         } catch (NumberFormatException nfe) {
-            System.err.println("Please enter a number!");
+            System.err.println("Please enter a number that is also less than 9 digits!");
             app.getRouter().navigate("/addAccount");
         } catch (IOException | InvalidInputException ioe) {
             System.err.println("Please enter a proper input!");

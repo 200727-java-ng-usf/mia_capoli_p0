@@ -14,7 +14,6 @@ public class AppUser {
     private String password;
     private String firstName;
     private String lastName;
-    private Role role;
 
     //AppUser constructors
     public AppUser() {
@@ -26,21 +25,14 @@ public class AppUser {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = Role.BASIC_MEMBER;
     }
 
 
-    public AppUser(int id, String firstName, String lastName, String username, String password, Role role) {
+    public AppUser(int id, String firstName, String lastName, String username, String password) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = role;
-    }
-
-    public AppUser(String username, String password) {
-        this.username = username;
-        this.password = password;
     }
 
 
@@ -85,13 +77,6 @@ public class AppUser {
         this.lastName = lastName;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     //AppUser Method overrides.
     @Override
@@ -103,13 +88,12 @@ public class AppUser {
                 Objects.equals(username, appUser.username) &&
                 Objects.equals(password, appUser.password) &&
                 Objects.equals(firstName, appUser.firstName) &&
-                Objects.equals(lastName, appUser.lastName) &&
-                role == appUser.role;
+                Objects.equals(lastName, appUser.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, firstName, lastName, role);
+        return Objects.hash(id, username, password, firstName, lastName);
     }
 
     @Override
@@ -120,7 +104,6 @@ public class AppUser {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", role=" + role +
                 '}';
     }
 }

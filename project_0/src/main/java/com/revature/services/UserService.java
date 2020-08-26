@@ -3,7 +3,6 @@ package com.revature.services;
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.models.AppUser;
-import com.revature.models.Role;
 import com.revature.repos.AppUserRepo;
 
 import java.util.Optional;
@@ -45,7 +44,6 @@ public class UserService {
             throw new AuthenticatorException("Provided username is already in use!");
         }
 
-        newUser.setRole(Role.BASIC_MEMBER);
         userRepo.save(newUser);
         app.setCurrentUser(newUser);
     }

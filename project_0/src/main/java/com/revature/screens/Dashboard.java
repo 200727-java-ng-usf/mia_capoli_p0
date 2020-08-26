@@ -19,7 +19,9 @@ public class Dashboard extends Screen{
         System.out.println("1) Check Balance");
         System.out.println("2) Add Funds");
         System.out.println("3) Withdraw Funds");
-        System.out.println("4) Go home");
+        System.out.println("4) Add Account");
+        System.out.println("5) Go home");
+
 
         try {
             System.out.print("> ");
@@ -36,10 +38,10 @@ public class Dashboard extends Screen{
                     app.getRouter().navigate("/withdrawFunds");
                     break;
                 case "4":
-                    app.getRouter().navigate("/home");
+                    app.getRouter().navigate("/addAccount");
                     break;
                 case "5":
-                    app.getRouter().navigate("/addAccount");
+                    app.getRouter().navigate("/home");
                     break;
                 default:
                     System.err.println("Invalid selection!");
