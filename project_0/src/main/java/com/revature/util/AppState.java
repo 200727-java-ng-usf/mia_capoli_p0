@@ -11,6 +11,10 @@ import com.revature.services.UserService;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+
+/**
+ * Appstate - instantiate singletons and add screens to the router.
+ */
 public class AppState {
     private BufferedReader console;
     private AppUser currentUser;
@@ -19,9 +23,7 @@ public class AppState {
     private Account currentAccount;
     private boolean add;
 
-    /**
-     * Appstate constructor - instantiate singletons and add screens to the router.
-     */
+
     public AppState() {
 
         appRunning = true;

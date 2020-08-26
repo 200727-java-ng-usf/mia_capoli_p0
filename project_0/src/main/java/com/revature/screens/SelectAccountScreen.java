@@ -11,7 +11,9 @@ import com.revature.services.AccountService;
 import java.io.IOException;
 import java.util.Set;
 
-
+/**
+ * Render the Select Account Screen and select an account.
+ */
 public class SelectAccountScreen extends Screen {
 
     private AccountService accountService;
@@ -46,8 +48,8 @@ public class SelectAccountScreen extends Screen {
             System.err.println("Please enter a valid account number!");
             app.getRouter().navigate("/selectAccount");
         } catch (AuthenticatorException ae) {
-            System.err.println("No accounts exist for this user.");
-            app.getRouter().navigate("/addAccount");
+            System.err.println("Please enter an account number that you have an account for!");
+            app.getRouter().navigate("/selectAccount");
         } catch (Exception e) {
             System.err.println("A problem occurred.");
             app.getRouter().navigate("/selectAccount");

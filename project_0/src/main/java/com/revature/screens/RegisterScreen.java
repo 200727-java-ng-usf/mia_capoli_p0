@@ -10,6 +10,9 @@ import java.io.IOException;
 
 import static com.revature.AppDriver.app;
 
+/**
+ * Render the Register Screen and register for an account
+ */
 public class RegisterScreen extends Screen {
 
     private UserService userService;

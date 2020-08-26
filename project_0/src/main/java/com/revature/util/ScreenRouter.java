@@ -5,6 +5,9 @@ import com.revature.screens.Screen;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A class to add screens to and to navigate with in the application.
+ */
 public class ScreenRouter {
 
     private Set<Screen> screens = new HashSet<>();

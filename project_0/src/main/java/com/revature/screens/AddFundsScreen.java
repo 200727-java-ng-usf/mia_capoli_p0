@@ -12,6 +12,9 @@ import java.util.Locale;
 import static com.revature.AppDriver.app;
 
 
+/**
+ * Render the AddFunds Screen and add funds to the account.
+ */
 public class AddFundsScreen extends Screen{
 
     private AccountService accountService;

@@ -12,6 +12,10 @@ import java.util.Locale;
 
 import static com.revature.AppDriver.app;
 
+
+/**
+ * Render the Withdraw Screen and withdraw money from the account.
+ */
 public class WithdrawScreen extends Screen {
     private AccountService accountService;
 

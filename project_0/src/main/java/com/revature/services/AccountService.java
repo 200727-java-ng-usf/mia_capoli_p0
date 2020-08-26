@@ -12,6 +12,9 @@ import java.util.Set;
 
 import static com.revature.AppDriver.app;
 
+/**
+ * Service Classes for the accounts to check for errors in the inputs and communicate with the Repo class.
+ */
 public class AccountService {
 
     private AccountRepo accountRepo;

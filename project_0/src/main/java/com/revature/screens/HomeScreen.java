@@ -5,6 +5,9 @@ import com.revature.util.ScreenRouter;
 import java.io.IOException;
 import static com.revature.AppDriver.app;
 
+/**
+ * Render the Home Screen and navigate to screens from the home page.
+ */
 public class HomeScreen extends Screen {
 
     public HomeScreen() {

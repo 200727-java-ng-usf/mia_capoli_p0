@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import static com.revature.AppDriver.app;
 
+/**
+ * Render the Dashboard Screen and navigate to screens in the application.
+ */
 public class Dashboard extends Screen{
 
     public Dashboard() {

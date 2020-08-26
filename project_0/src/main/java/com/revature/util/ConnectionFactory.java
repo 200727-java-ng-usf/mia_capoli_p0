@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Get a connection to the persisting repository.
+ */
 public class ConnectionFactory {
 
     private static ConnectionFactory connFactory = new ConnectionFactory();
@@ -14,7 +17,7 @@ public class ConnectionFactory {
     private Properties props = new Properties();
 
     /**
-     * Conneciton Factory Constructor
+     * Connection Factory Constructor
      */
     private ConnectionFactory() {
         try {

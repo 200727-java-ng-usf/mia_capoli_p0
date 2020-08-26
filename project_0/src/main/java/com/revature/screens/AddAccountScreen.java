@@ -10,6 +10,9 @@ import java.io.IOException;
 
 import static com.revature.AppDriver.app;
 
+/**
+ * Render the Add Account Screen and add the entered account to the repo.
+ */
 public class AddAccountScreen extends Screen {
 
     private AccountService accountService;

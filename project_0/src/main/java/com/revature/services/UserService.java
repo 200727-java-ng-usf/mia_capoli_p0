@@ -8,6 +8,9 @@ import java.util.Optional;
 
 import static com.revature.AppDriver.app;
 
+/**
+ * Service Classes for the users to check for errors in the inputs and communicate with the Repo class.
+ */
 public class UserService {
 
     private AppUserRepo userRepo;

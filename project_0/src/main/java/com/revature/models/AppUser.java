@@ -2,11 +2,12 @@ package com.revature.models;
 
 import java.util.Objects;
 
+/**
+ * Appuser Object Pojo
+ * An object created to hold users and their properties.
+ */
+
 public class AppUser {
-    /**
-     * Appuser Object Pojo
-     * An object created to hold users and their properties.
-     */
 
     //AppUser fields
     private Integer id;

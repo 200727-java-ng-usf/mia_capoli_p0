@@ -14,6 +14,9 @@ import java.util.Set;
 
 import static com.revature.AppDriver.app;
 
+/**
+ * The class that accesses the Account Repository and contains methods to easily access accounts.
+ */
 public class AccountRepo {
 
     /**

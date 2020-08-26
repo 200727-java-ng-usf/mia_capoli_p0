@@ -12,7 +12,9 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-
+/**
+ * The class that accesses the AppUser Repository and contains methods to easily access users.
+ */
 public class AppUserRepo {
     /**
      * Find a user in the Repo based on the Username and Password provided.

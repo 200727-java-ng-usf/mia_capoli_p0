@@ -4,12 +4,12 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Account Object Pojo
+ * An object created to hold accounts and their properties.
+ */
 public class Account {
 
-    /**
-     * Account Object Pojo
-     * An object created to hold accounts and their properties.
-     */
 
     //Account fields
     NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);

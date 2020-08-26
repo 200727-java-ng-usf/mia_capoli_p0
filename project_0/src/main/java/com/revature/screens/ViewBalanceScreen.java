@@ -6,6 +6,9 @@ import java.util.Locale;
 
 import static com.revature.AppDriver.app;
 
+/**
+ * View your balance and go back to your dashboard.
+ */
 public class ViewBalanceScreen extends Screen {
 
     NumberFormat nf = NumberFormat.getCurrencyInstance(Locale.US);

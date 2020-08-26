@@ -8,6 +8,10 @@ import java.io.IOException;
 
 import static com.revature.AppDriver.app;
 
+
+/**
+ * Render the Login Screen and log into your account.
+ */
 public class LoginScreen extends Screen {
 
     private UserService userService;
