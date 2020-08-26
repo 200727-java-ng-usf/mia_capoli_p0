@@ -4,9 +4,6 @@ import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.services.UserService;
 
-import javax.imageio.IIOException;
-import javax.security.sasl.AuthenticationException;
-
 import java.io.IOException;
 
 import static com.revature.AppDriver.app;
@@ -21,6 +18,9 @@ public class LoginScreen extends Screen {
         this.userService = userService;
     }
 
+    /**
+     * Render the Login Screen.
+     */
     @Override
     public void render() {
         String username, password;
@@ -32,8 +32,9 @@ public class LoginScreen extends Screen {
             System.out.print("Password: ");
             password = app.getConsole().readLine();
 
+            //Authenticate the user inputted.
             userService.authenticate(username, password);
-
+            //Navigate to the proper screen.
             if (app.isSessionValid()) {
                 app.getRouter().navigate("/selectAccount");
             }
@@ -45,7 +46,6 @@ public class LoginScreen extends Screen {
             System.err.println("Invalid user credentials given!");
             app.getRouter().navigate("/login");
         } catch (Exception e) {
-            e.printStackTrace();
             System.err.println("A problem occurred.");
             app.getRouter().navigate("/login");
         }

@@ -19,7 +19,9 @@ public class AppState {
     private Account currentAccount;
     private boolean add;
 
-
+    /**
+     * Appstate constructor - instantiate singletons and add screens to the router.
+     */
     public AppState() {
 
         appRunning = true;
@@ -42,10 +44,12 @@ public class AppState {
               .addScreen(new SelectAccountScreen(accountService));
     }
 
+    //get the buffered reader
     public BufferedReader getConsole() {
         return console;
     }
 
+    //get + set the current user
     public AppUser getCurrentUser() {
         return currentUser;
     }
@@ -54,10 +58,11 @@ public class AppState {
         this.currentUser = currentUser;
     }
 
+    //get the screenrouter
     public ScreenRouter getRouter() {
         return router;
     }
-
+    //get and set if the app is running
     public boolean isAppRunning() {
         return appRunning;
     }
@@ -66,6 +71,7 @@ public class AppState {
         this.appRunning = appRunning;
     }
 
+    //get and set the current account
     public Account getCurrentAccount() {
         return currentAccount;
     }
@@ -74,14 +80,17 @@ public class AppState {
         this.currentAccount = currentAccount;
     }
 
+    //invalidate the current user
     public void invalidateCurrentUser() {
         currentUser = null;
     }
 
+    //check if the session is valid
     public boolean isSessionValid() {
         return (this.currentUser != null || this.currentAccount != null);
     }
 
+    //check if the protocol is to add or withdraw funds
     public boolean isAdd() {
         return add;
     }

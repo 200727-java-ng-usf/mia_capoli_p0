@@ -13,23 +13,31 @@ public class ConnectionFactory {
 
     private Properties props = new Properties();
 
+    /**
+     * Conneciton Factory Constructor
+     */
     private ConnectionFactory() {
         try {
             props.load(new FileReader("./src/main/resources/application.properties"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Could not get a connection!");
         }
     }
 
+    //Get the connection factory
     public static ConnectionFactory getConnFactory() {
         return connFactory;
     }
 
+    /**
+     * Get the connection to the database
+     * @return
+     */
     public Connection getConnection() {
 
         Connection conn = null;
 
-
+        //attempt to log into the database
         try {
 
             Class.forName("org.postgresql.Driver");
@@ -38,7 +46,7 @@ public class ConnectionFactory {
                     props.getProperty("username"),
                     props.getProperty("password"));
         } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            System.err.println("Cannot find the proper schema referenced!");
         }
 
         if (conn == null) {
@@ -48,6 +56,7 @@ public class ConnectionFactory {
         return conn;
 
     }
+
 
     @Override
     protected Object clone() throws CloneNotSupportedException {

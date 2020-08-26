@@ -1,7 +1,7 @@
 package com.revature.screens;
 
 public abstract class Screen {
-
+    //Screen Abstract Class with constructor and render abstract method
     private String name;
     private String location;
 

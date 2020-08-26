@@ -4,7 +4,6 @@ import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.models.AppUser;
 import com.revature.repos.AppUserRepo;
-
 import java.util.Optional;
 
 import static com.revature.AppDriver.app;
@@ -17,10 +16,17 @@ public class UserService {
         userRepo = repo;
     }
 
+
+    /**
+     * Authenticate the provided username and password.
+     * @param username
+     * @param password
+     * @return
+     */
     public AppUser authenticate(String username, String password) {
 
         Optional<AppUser> _authUser = (userRepo.findUser(username, password));
-
+        //if the user isn't present in the persistence layer, throw an exception. Otherwise set the current user to the provided user credentials' user.
         if (!_authUser.isPresent()) {
             app.invalidateCurrentUser();
             throw new AuthenticatorException();
@@ -32,23 +38,36 @@ public class UserService {
         return _authUser.get();
     }
 
+    /**
+     * Register a new user.
+     * @param newUser
+     */
     public void registration(AppUser newUser) {
+        //if the user isn't valid, invalidate them and throw an exception.
         if (!isUserValid(newUser)) {
             app.invalidateCurrentUser();
             throw new InvalidInputException("Invalid credentials given for registration.");
         }
 
+        //attempt to get the user provided in the repo.
         Optional<AppUser> _existingUser = userRepo.findUserByUsername(newUser.getUsername());
+
+        //if the user already exists, invalidate the current user and throw an exception.
         if (_existingUser.isPresent()) {
             app.invalidateCurrentUser();
             throw new AuthenticatorException("Provided username is already in use!");
         }
 
+        //save the current user in the persistence layer and set the current user
         userRepo.save(newUser);
         app.setCurrentUser(newUser);
     }
 
-
+    /**
+     * Check if the provided user is valid.
+     * @param user
+     * @return
+     */
     public boolean isUserValid(AppUser user) {
         if (user == null) return false;
         if (user.getFirstName() == null || user.getFirstName().trim().equals("")) return false;

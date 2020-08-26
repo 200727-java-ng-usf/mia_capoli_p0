@@ -5,11 +5,8 @@ import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
 import com.revature.exceptions.NegativeException;
 import com.revature.models.Account;
-
 import com.revature.services.AccountService;
-
 import java.io.IOException;
-
 
 import static com.revature.AppDriver.app;
 
@@ -23,6 +20,9 @@ public class AddAccountScreen extends Screen {
         this.accountService = accountService;
     }
 
+    /**
+     *  Render the Add Account Screen.
+     */
     @Override
     public void render() {
         int accountId;
@@ -34,9 +34,10 @@ public class AddAccountScreen extends Screen {
             System.out.println("Please enter the account name: ");
             accountName = app.getConsole().readLine();
 
+            //create an account from user inputs and register it on the service layer
             Account newAccount = new Account(accountName, accountId);
             accountService.registration(newAccount);
-
+            //navigate to the next logical screen
             if (app.isSessionValid()) {
                 app.getRouter().navigate("/selectAccount");
             }

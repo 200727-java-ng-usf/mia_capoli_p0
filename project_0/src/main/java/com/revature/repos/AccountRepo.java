@@ -115,7 +115,7 @@ public class AccountRepo {
     public void save(Account newAccount) {
         AppUser currentUser = app.getCurrentUser();
         try (Connection conn = ConnectionFactory.getConnFactory().getConnection()) {
-            //Insert the account params as a row in the database.
+            //Insert the account params as a row in the user_account database.
             String sql = "INSERT INTO project0.user_accounts (account_id, name, balance) " +
                     "VALUES (?, ? , ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class AccountRepo {
             pstmt.setInt(1, newAccount.getAccountId());
             pstmt.setString(2, newAccount.getAccountName());
             pstmt.setDouble(3, newAccount.getBalance());
-
+            //adding the proper values into the join table.
             String sql2 = "INSERT INTO project0.app_user_accounts (user_id, account_id) " +
                     "VALUES (?, ?)";
             PreparedStatement pstmt2 = conn.prepareStatement(sql2);

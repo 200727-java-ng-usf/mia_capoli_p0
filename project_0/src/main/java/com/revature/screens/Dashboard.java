@@ -1,8 +1,5 @@
 package com.revature.screens;
 
-import com.revature.services.AccountService;
-import com.revature.services.UserService;
-
 import java.io.IOException;
 
 import static com.revature.AppDriver.app;
@@ -13,6 +10,9 @@ public class Dashboard extends Screen{
         super("DashboardScreen", "/Dashboard");
     }
 
+    /**
+     * Render the Dashboard Screen.
+     */
     @Override
     public void render() {
         System.out.println("Welcome to your Dashboard!\n");
@@ -26,7 +26,7 @@ public class Dashboard extends Screen{
         try {
             System.out.print("> ");
             String userSelection = app.getConsole().readLine().trim();
-
+            //In each case, navigate to the properly selected screen.
             switch (userSelection) {
                 case "1":
                     app.getRouter().navigate("/viewBalance");

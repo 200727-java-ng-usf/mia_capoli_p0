@@ -11,16 +11,20 @@ public class HomeScreen extends Screen {
         super("HomeScreen", "/home");
     }
 
+    /**
+     * Render the Home Screen
+     */
     @Override
     public void render() {
-        System.out.println("Welcome to the Bank of Capoli!\n");
-        System.out.println("1) Login");
-        System.out.println("2) Register");
-        System.out.println("3) Exit Application");
         try {
+            System.out.println("Welcome to the Bank of Capoli!\n");
+            System.out.println("1) Login");
+            System.out.println("2) Register");
+            System.out.println("3) Exit Application");
             System.out.print("> ");
             String userSelection = app.getConsole().readLine().trim();
 
+            //in each case, navigate to the proper page, or set the app to not run.
             switch (userSelection) {
                 case "1":
                     app.getRouter().navigate("/login");

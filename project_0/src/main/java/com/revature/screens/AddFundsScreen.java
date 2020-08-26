@@ -23,6 +23,9 @@ public class AddFundsScreen extends Screen{
         this.accountService = accountService;
     }
 
+    /**
+     * Render the AddFunds Screen
+     */
     @Override
     public void render() {
 
@@ -32,11 +35,14 @@ public class AddFundsScreen extends Screen{
             double temp;
 
             System.out.println(" How much would you like to add? ");
-
+            //get the double from the input
             temp =  Double.parseDouble(app.getConsole().readLine());
+
+            //update the funds in the service layer
             accountService.fundsUpdate(true, temp);
             System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
 
+            //navigate to the next logical screen
             app.getRouter().navigate("/Dashboard");
 
 
@@ -50,7 +56,6 @@ public class AddFundsScreen extends Screen{
             System.err.println("Please enter a positive, non-zero number!");
             app.getRouter().navigate("/addFunds");
         } catch (Exception e) {
-            e.printStackTrace();
             System.err.println("A problem occurred.");
             app.getRouter().navigate("/addFunds");
         }

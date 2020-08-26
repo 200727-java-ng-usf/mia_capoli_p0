@@ -21,7 +21,9 @@ public class SelectAccountScreen extends Screen {
         this.accountService = accountService;
     }
 
-
+    /**
+     * Render the Select Account Screen.
+     */
     @Override
     public void render() {
         try {
@@ -34,8 +36,9 @@ public class SelectAccountScreen extends Screen {
             System.out.println("Please enter the account number that you would like to access:");
             System.out.print("> ");
             int userSelection = Integer.parseInt(app.getConsole().readLine().trim());
+            //Select the account in the repo by user input
             Account currentAccount = accountService.findAccountByAccountId(userSelection);
-
+            //set the current account and navigate to the dashboard
             app.setCurrentAccount(currentAccount);
             app.getRouter().navigate("/Dashboard");
 

@@ -22,6 +22,9 @@ public class WithdrawScreen extends Screen {
         this.accountService = accountService;
     }
 
+    /**
+     * Render the Withdraw Screen.
+     */
     @Override
     public void render() {
 
@@ -31,11 +34,13 @@ public class WithdrawScreen extends Screen {
             double temp;
 
             System.out.println(" How much would you like to withdraw? ");
-
             temp = Double.parseDouble(app.getConsole().readLine());
-            accountService.fundsUpdate(false, temp);
-            System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
 
+            //add funds on the service layer
+            accountService.fundsUpdate(false, temp);
+
+            //print out the new balance and navigate back to the dashboard
+            System.out.println("Your balance is now: " + nf.format(currentAccount.getBalance()));
             app.getRouter().navigate("/Dashboard");
 
         } catch (NumberFormatException | IOException | InvalidInputException nfe) {

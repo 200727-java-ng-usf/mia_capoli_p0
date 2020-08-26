@@ -19,7 +19,9 @@ public class RegisterScreen extends Screen {
         this.userService = userService;
     }
 
-
+    /**
+     * Render the Register Screen.
+     */
     @Override
     public void render() {
         String firstName;
@@ -38,12 +40,15 @@ public class RegisterScreen extends Screen {
             System.out.println("Please enter a password: ");
             password = app.getConsole().readLine();
 
+            //Register the user in the service layer
             AppUser newUser = new AppUser(username, password, firstName, lastName);
             userService.registration(newUser);
 
+            //Navigate to the proper screen
             if (app.isSessionValid()) {
                 app.getRouter().navigate("/addAccount");
             }
+
         } catch (AuthenticatorException ae) {
             System.err.println("Provided username is already in use!");
             app.getRouter().navigate("/register");

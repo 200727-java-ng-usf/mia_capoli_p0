@@ -14,11 +14,15 @@ public class ViewBalanceScreen extends Screen {
         super("ViewBalanceScreen", "/viewBalance");
     }
 
+    /**
+     * View Balance Screen
+     */
     @Override
     public void render() {
 
         Account currentAccount = app.getCurrentAccount();
 
+        //Print out the current account's balance and navigate back to the dashboard
         System.out.println("Your balance is: " + nf.format(currentAccount.getBalance()));
         app.getRouter().navigate("/Dashboard");
 
