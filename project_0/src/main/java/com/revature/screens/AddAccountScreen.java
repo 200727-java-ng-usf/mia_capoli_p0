@@ -3,6 +3,7 @@ package com.revature.screens;
 
 import com.revature.exceptions.AuthenticatorException;
 import com.revature.exceptions.InvalidInputException;
+import com.revature.exceptions.NegativeException;
 import com.revature.models.Account;
 
 import com.revature.services.AccountService;
@@ -40,11 +41,11 @@ public class AddAccountScreen extends Screen {
                 app.getRouter().navigate("/selectAccount");
             }
 
-        } catch (NumberFormatException nfe) {
-            System.err.println("Please enter a number that is also less than 9 digits!");
+        } catch (NumberFormatException | NegativeException nfe) {
+            System.err.println("Please enter a account number that is also less than 9 digits!");
             app.getRouter().navigate("/addAccount");
         } catch (IOException | InvalidInputException ioe) {
-            System.err.println("Please enter a proper input!");
+            System.err.println("Please enter a a non-zero, positive account number!");
             app.getRouter().navigate("/addAccount");
         } catch (AuthenticatorException ae) {
             System.err.println("Provided account id is already in use!");

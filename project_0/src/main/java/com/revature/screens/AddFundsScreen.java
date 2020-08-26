@@ -29,7 +29,7 @@ public class AddFundsScreen extends Screen{
         try {
             Account currentAccount = app.getCurrentAccount();
 
-            double temp = 0.00;
+            double temp;
 
             System.out.println(" How much would you like to add? ");
 

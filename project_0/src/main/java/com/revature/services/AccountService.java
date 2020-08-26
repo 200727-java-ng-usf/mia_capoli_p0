@@ -67,28 +67,29 @@ public class AccountService {
     public boolean isAccountValid(Account account) {
         if (account == null) return false;
         if (account.getAccountName() == null || account.getAccountName().trim().equals("")) return false;
-        if (account.getAccountId() == 0) return false;
+        if (account.getAccountId() == 0 || account.getAccountId() < 1) return false;
         return true;
     }
 
 
-    public double fundsUpdate(boolean isAdd, double funds) {
+    public double fundsUpdate(boolean isAdd, double fundstoAdd) {
         Account currentAccount = app.getCurrentAccount();
         double balance = currentAccount.getBalance();
-        double temp = funds;
+        double temp = fundstoAdd;
         if (temp <= 0) {
             throw new NegativeException("Please enter a positive, non-zero number!");
         } else {
             if (isAdd) {
-                balance = balance + temp;
+                balance = temp + balance;
             } else if (balance < temp) {
                 throw new OverdraftException("This account does not support overdrafting.");
             } else {
                 balance = balance - temp;
             }
-            currentAccount.setBalance(balance);
-            accountRepo.updateBalance(balance);
+
         }
+        currentAccount.setBalance(balance);
+        accountRepo.updateBalance(balance);
         return balance;
     }
 }
